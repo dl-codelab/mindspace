@@ -591,7 +591,7 @@
 <div class="mobile-nav">
   <a class="mobile-link active" href="#"><i class="ti ti-layout-dashboard"></i>Início</a>
   <a class="mobile-link" href="#"><i class="ti ti-calendar"></i>Agenda</a>
-  <a class="mobile-link" href="#"><i class="ti ti-chart-bar"></i>Desempenho</a>
+  <a class="mobile-link" href="#"><i class="ti ti-chart-bar"></i>Resultados</a>
   <a class="mobile-link" href="#"><i class="ti ti-settings"></i>Painel</a>
 </div>
 
@@ -689,8 +689,8 @@
 // ===================== INICIALIZAÇÃO DO FIREBASE (v10+) =====================
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
-// Caso queira usar banco de dados futuramente, descomente a linha abaixo:
-// import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+// IMPORTANTE: Importando os módulos necessários para o Banco de Dados em Tempo Real
+import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCkoD_NBW5K1rBTAtj-pYBsdngpfjZuNS8",
@@ -706,7 +706,7 @@ const firebaseConfig = {
 // Inicialização estável
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-// const db = getDatabase(app); // Descomente para usar o Realtime Database
+const db = getDatabase(app); // Banco de dados ativado!
 
 // ===================== DATA & STORAGE =====================
 const MATERIAS = [
@@ -723,19 +723,41 @@ const MATERIAS = [
 
 function getMateria(id){ return MATERIAS.find(m=>m.id===id)||MATERIAS[0]; }
 
-let notes = JSON.parse(localStorage.getItem('notes')||'[]');
-let homeworks = JSON.parse(localStorage.getItem('homeworks')||'[]');
-let works = JSON.parse(localStorage.getItem('works')||'[]');
+// Variáveis globais que vão armazenar os dados vindos da nuvem
+let notes = [];
+let homeworks = [];
+let works = [];
 
+// Função modificada para salvar diretamente na nuvem do Firebase
 function save(){
-  localStorage.setItem('notes', JSON.stringify(notes));
-  localStorage.setItem('homeworks', JSON.stringify(homeworks));
-  localStorage.setItem('works', JSON.stringify(works));
-  
-  /* Para salvar no Firebase no futuro, você usaria algo como:
-     set(ref(db, 'usuarios/daniel/dados'), { notes, homeworks, works });
-  */
+  set(ref(db, 'usuarios/daniel'), {
+    notes: notes,
+    homeworks: homeworks,
+    works: works
+  }).catch(error => {
+    console.error("Erro ao salvar no Firebase: ", error);
+  });
 }
+
+// Escuta em tempo real: Sempre que mudar no celular, altera no PC instantaneamente
+const userRef = ref(db, 'usuarios/daniel');
+onValue(userRef, (snapshot) => {
+  const data = snapshot.val();
+  if (data) {
+    notes = data.notes || [];
+    homeworks = data.homeworks || [];
+    works = data.works || [];
+  } else {
+    notes = [];
+    homeworks = [];
+    works = [];
+  }
+  // Atualiza as listas na tela assim que os dados chegam da nuvem
+  renderToday();
+  renderNotes();
+  renderHW();
+  renderWorks();
+});
 
 // ===================== DATE =====================
 const WEEKDAYS = ['Domingo','Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado'];
@@ -757,7 +779,7 @@ function daysLeft(deadline){
   return Math.round((b-a)/(1000*60*60*24));
 }
 
-// ===================== INTERATIVIDADE DOS MENUS (ACTIVE STATE) =====================
+// ===================== INTERATIVIDADE DOS MENUS =====================
 const topLinks = document.querySelectorAll('#top-nav .nav-link');
 const mobileLinks = document.querySelectorAll('.mobile-nav .mobile-link');
 
@@ -902,7 +924,7 @@ function checkHW(i){
     el.style.transition = 'all .4s ease';
     el.classList.add('removing');
     setTimeout(()=>{
-      homeworks.splice(i,1); save(); renderHW();
+      homeworks.splice(i,1); save();
     },420);
   },1400);
 }
@@ -993,7 +1015,7 @@ function buildNoteAdd(){
         const hasD = document.getElementById('note-has-deadline').checked;
         const deadline = hasD ? document.getElementById('note-deadline').value : null;
         notes.push({ text, created: todayStr, deadline });
-        save(); renderNotes(); renderToday(); closePopup();
+        save(); closePopup();
       });
     }
   }, 50);
@@ -1063,7 +1085,7 @@ function buildNotesAll(){
         if(btnDel) {
           btnDel.addEventListener('click', () => {
             if(!confirm('Excluir esta anotação?')) return;
-            notes.splice(i,1); save(); renderNotes(); renderToday();
+            notes.splice(i,1); save();
             document.getElementById('popup-content').innerHTML = buildNotesAll();
             const newClose = document.getElementById('popup-content').querySelector('.popup-close');
             if(newClose) newClose.addEventListener('click', closePopup);
@@ -1103,7 +1125,7 @@ function buildHWAdd(){
         const text = document.getElementById('hw-text').value.trim();
         if(!text){ alert('Descreva o dever!'); return; }
         homeworks.push({ materia: selectedHWMateria, text });
-        save(); renderHW(); closePopup();
+        save(); closePopup();
       });
     }
   }, 50);
@@ -1158,7 +1180,7 @@ function buildWorkAdd(){
         const deadline = document.getElementById('work-deadline').value;
         if(!deadline){ alert('Defina a data de entrega!'); return; }
         works.push({ title, materia: selectedWorkMateria, desc, deadline });
-        save(); renderWorks(); renderToday(); closePopup();
+        save(); closePopup();
       });
     }
   }, 50);
@@ -1206,7 +1228,7 @@ function buildWorkDetail(i){
     if(btnDelWork) {
       btnDelWork.addEventListener('click', () => {
         if(!confirm('Excluir este trabalho?')) return;
-        works.splice(i,1); save(); renderWorks(); renderToday(); closePopup();
+        works.splice(i,1); save(); closePopup();
       });
     }
     const btnCloseDetail = document.getElementById('btn-close-detail');
@@ -1247,12 +1269,6 @@ function buildWorkDetail(i){
       </button>
     </div>`;
 }
-
-// ===================== INIT =====================
-renderToday();
-renderNotes();
-renderHW();
-renderWorks();
 </script>
 </body>
 </html>

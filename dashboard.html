@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daniel Lucca — Dashboard Escolar</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+  :root {
+    --blue: #2563EB;
+    --blue-dark: #1D4ED8;
+    --blue-light: #DBEAFE;
+    --blue-mid: #3B82F6;
+    --green: #16A34A;
+    --green-light: #DCFCE7;
+    --red: #E11D48;
+    --red-light: #FFE4E6;
+    --pink: #DB2777;
+    --pink-light: #FCE7F3;
+    --amber: #D97706;
+    --amber-light: #FEF3C7;
+    --purple: #7C3AED;
+    --purple-light: #EDE9FE;
+    --teal: #0D9488;
+    --teal-light: #CCFBF1;
+    --orange: #EA580C;
+    --orange-light: #FFEDD5;
+    --sky: #0284C7;
+    --sky-light: #E0F2FE;
+    --indigo: #4338CA;
+    --indigo-light: #E0E7FF;
+    --bg: #EEF2F9;
+    --card: #FFFFFF;
+    --text: #0F172A;
+    --text-muted: #64748B;
+    --text-light: #94A3B8;
+    --border: #E2E8F0;
+    --radius: 20px;
+    --radius-sm: 12px;
+    --shadow: 0 2px 12px rgba(0,0,0,0.06);
+    --shadow-md: 0 4px 24px rgba(0,0,0,0.10);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ===== TOP NAV (prepared for future) ===== */
+  #top-nav {
+    height: 56px;
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    padding: 0 28px;
+    gap: 8px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+  }
+.logo-text {
+  font-weight: 800 !important;
+  font-size: 17px !important;
+  letter-spacing: -0.4px !important;
+  color: #FFFFFF !important; /* Força a cor grafite escura idêntica aos textos do painel */
+}
+  #top-nav .nav-logo .logo-icon {
+    width: 32px; height: 32px; background: var(--blue);
+    border-radius: 10px; display: grid; place-items: center; color: #fff;
+    font-size: 17px;
+  }
+  #top-nav .nav-links {
+    display: center; gap: 2px; margin-left: 220px; flex: 1; 
+  }
+  #top-nav .nav-link {
+    padding: 6px 14px; border-radius: 10px; font-size: 14px;
+    font-weight: 500; color: var(--text-muted); cursor: pointer;
+    transition: all .15s; text-decoration: none;
+  }
+  #top-nav .nav-link:hover { background: var(--bg); color: var(--text); }
+  #top-nav .nav-link.active { background: var(--blue-light); color: var(--blue); }
+  #top-nav .nav-right { display: flex; align-items: center; gap: 10px; margin-left: auto; }
+  #top-nav .nav-avatar {
+    width: 34px; height: 34px; background: var(--blue);
+    border-radius: 50%; display: grid; place-items: center;
+    color: #fff; font-weight: 700; font-size: 13px; cursor: pointer;
+  }
+
+  /* ===== MAIN LAYOUT ===== */
+  .main {
+    display: grid;
+    grid-template-columns: 280px 1fr 300px;
+    gap: 20px;
+    padding: 24px 28px;
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+
+  /* ===== CARDS ===== */
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+}
+.main > div:nth-child(1) .card {
+  height: 230px;
+}
+
+.col-right .card {
+  height: 500px;
+}
+
+  /* ===== PROFILE CARD ===== */
+  .profile-card {
+    background: linear-gradient(145deg, #1E3A8A 0%, #2563EB 60%, #3B82F6 100%);
+    border-radius: var(--radius);
+    padding: 0;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    position: relative;
+    min-height: 250px;
+  }
+  .profile-card-bg {
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Ccircle cx='320' cy='60' r='110' fill='%231D4ED8' opacity='.4'/%3E%3Ccircle cx='280' cy='180' r='70' fill='%2393C5FD' opacity='.15'/%3E%3Ccircle cx='60' cy='240' r='80' fill='%231E40AF' opacity='.3'/%3E%3C/svg%3E") no-repeat center/cover;
+  }
+  .profile-card-content {
+    position: relative; z-index: 1; padding: 24px;
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  .profile-avatar {
+    width: 56px; height: 56px; border-radius: 18px;
+    background: rgba(147,197,253,0.3); border: 2px solid rgba(255,255,255,0.4);
+    display: grid; place-items: center;
+    font-size: 22px; font-weight: 800; color: #fff;
+    backdrop-filter: blur(8px);
+  }
+  .profile-name { font-size: 20px; font-weight: 800; color: #fff; line-height: 1.2; }
+  .profile-sub { font-size: 13px; color: rgba(255,255,255,0.75); font-weight: 500; margin-top: 2px; }
+  .profile-badges {
+    display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px;
+  }
+  .profile-badge {
+    padding: 4px 10px; border-radius: 20px;
+    background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25);
+    font-size: 11px; font-weight: 600; color: #fff; backdrop-filter: blur(4px);
+    display: flex; align-items: center; gap: 4px;
+  }
+
+  /* ===== SECTION HEADERS ===== */
+  .sec-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 14px;
+  }
+  .sec-title {
+    font-size: 15px; font-weight: 700; color: var(--text);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .sec-title .icon-badge {
+    width: 28px; height: 28px; border-radius: 9px;
+    display: grid; place-items: center; font-size: 15px;
+  }
+  .btn-add {
+    width: 30px; height: 30px; border-radius: 10px;
+    background: var(--blue); color: #fff; border: none;
+    cursor: pointer; font-size: 18px; display: grid; place-items: center;
+    transition: all .15s; box-shadow: 0 2px 8px rgba(37,99,235,.3);
+  }
+  .btn-add:hover { background: var(--blue-dark); transform: scale(1.05); }
+
+  /* ===== WORKS CARD ===== */
+  .work-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 12px; border-radius: var(--radius-sm);
+    background: var(--bg); margin-bottom: 8px;
+    cursor: pointer; transition: all .15s;
+    border: 1px solid transparent;
+  }
+  .work-item:hover { background: var(--blue-light); border-color: var(--blue); }
+  .work-item-icon {
+    width: 34px; height: 34px; border-radius: 10px;
+    display: grid; place-items: center; font-size: 17px; flex-shrink: 0;
+  }
+  .work-item-info { flex: 1; min-width: 0; }
+  .work-item-title {
+    font-size: 13px; font-weight: 600; color: var(--text);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .work-item-meta { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
+  .work-item-btn {
+    width: 28px; height: 28px; border-radius: 8px;
+    background: var(--blue-light); color: var(--blue);
+    border: none; cursor: pointer; display: grid; place-items: center;
+    font-size: 14px; flex-shrink: 0; transition: all .15s;
+  }
+  .work-item-btn:hover { background: var(--blue); color: #fff; }
+  .no-items {
+    text-align: center; padding: 20px 0;
+    color: var(--text-light); font-size: 13px; font-weight: 500;
+  }
+
+  /* ===== TODAY CARD ===== */
+.today-card { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 14px;
+  height: 240px; /* Mantém fixo para alinhar com o Perfil (que tem 220px) */
+}
+
+#today-blocks {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+  .today-header-title {
+    font-size: 18px; font-weight: 800; color: var(--text); line-height: 1.2;
+  }
+  .today-header-date { font-size: 13px; color: var(--text-muted); font-weight: 500; margin-top: 4px;}
+
+  .today-block {
+    padding: 14px 16px; border-radius: var(--radius-sm);
+    background: var(--bg); border: 1px solid var(--border);
+    display: flex; align-items: center; gap: 12px;
+
+    margin-bottom: 12px;
+  }
+  .today-block-icon {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: grid; place-items: center; font-size: 20px; flex-shrink: 0;
+  }
+  .today-block-content { flex: 1; }
+  .today-block-label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: .5px; }
+  .today-block-value { font-size: 14px; font-weight: 700; color: var(--text); margin-top: 2px; }
+  .today-block-sub { font-size: 12px; color: var(--text-muted); margin-top: 1px; }
+
+  #works-list, #hw-list {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 4px; /* Espaço para a barra de rolagem não cobrir o conteúdo */
+  
+}
+
+
+  /* ===== NOTES ===== */
+.notes-card {
+  background: var(--blue);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  
+  /* ALTERADO: Ajustado para 460px para morrer na mesma linha que o de Trabalhos */
+  height: 240px; 
+}
+
+#note-recent-area {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+  .notes-header {
+    display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;
+  }
+  .notes-title {
+    font-size: 15px; font-weight: 700; color: #fff;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .btn-add-white {
+    width: 30px; height: 30px; border-radius: 10px;
+    background: rgba(255,255,255,0.2); color: #fff; border: none;
+    cursor: pointer; font-size: 18px; display: grid; place-items: center;
+    transition: all .15s;
+  }
+  .btn-add-white:hover { background: rgba(255,255,255,0.35); transform: scale(1.05); }
+
+  .note-recent {
+    background: rgba(255,255,255,0.15); border-radius: var(--radius-sm);
+    padding: 12px 14px; margin-bottom: 10px; border: 1px solid rgba(255,255,255,0.2);
+    backdrop-filter: blur(8px);
+  }
+  .note-recent-text { font-size: 13px; color: #fff; font-weight: 500; line-height: 1.5; }
+  .note-recent-date {
+    display: inline-block; background: rgba(255,255,255,0.25);
+    border-radius: 8px; padding: 2px 8px; font-size: 11px;
+    font-weight: 700; color: #fff; margin-top: 6px;
+  }
+  .btn-ver-todas {
+    width: 100%; padding: 11px; border-radius: var(--radius-sm);
+    background: #fff; color: var(--blue); border: none;
+    font-size: 14px; font-weight: 700; cursor: pointer; transition: all .15s;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+  .btn-ver-todas:hover { background: var(--blue-light); }
+
+  #works-list, #today-blocks, #note-recent-area, #hw-list {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+  /* ===== HOMEWORK ===== */
+  .hw-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 14px; border-radius: var(--radius-sm);
+    background: var(--bg); margin-bottom: 8px;
+    border: 1px solid var(--border); transition: all .2s;
+  }
+  .hw-item.completing .hw-text { text-decoration: line-through; color: var(--text-light); }
+  .hw-item.completing { opacity: 0.6; }
+  .hw-item.removing {
+    opacity: 0; transform: translateX(20px) scale(0.95);
+    max-height: 0; margin-bottom: 0; padding: 0; overflow: hidden;
+  }
+  .hw-subject-icon {
+    width: 36px; height: 36px; border-radius: 11px;
+    display: grid; place-items: center; font-size: 18px; flex-shrink: 0;
+  }
+  .hw-content { flex: 1; min-width: 0; }
+  .hw-subject {
+    font-size: 10px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+  .hw-text { font-size: 13px; font-weight: 500; color: var(--text); line-height: 1.4; }
+  .hw-check {
+    width: 28px; height: 28px; border-radius: 50%;
+    border: 2px solid var(--border); background: var(--card);
+    cursor: pointer; display: grid; place-items: center;
+    transition: all .2s; flex-shrink: 0; font-size: 14px; color: transparent;
+  }
+  .hw-check:hover { border-color: var(--green); background: var(--green-light); color: var(--green); }
+  .hw-check.checked { border-color: var(--green); background: var(--green); color: #fff; }
+
+  .btn-add-hw {
+    width: 100%; padding: 11px; border-radius: var(--radius-sm);
+    background: var(--blue); color: #fff; border: none;
+    font-size: 14px; font-weight: 700; cursor: pointer; transition: all .15s;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+    margin-top: 4px; box-shadow: 0 2px 10px rgba(37,99,235,.3);
+  }
+  .btn-add-hw:hover { background: var(--blue-dark); transform: translateY(-1px); }
+
+  /* ===== POPUP / MODAL ===== */
+  .overlay {
+    position: fixed; inset: 0; background: rgba(15,23,42,0.55);
+    z-index: 200; display: flex; align-items: center; justify-content: center;
+    backdrop-filter: blur(4px); opacity: 0; pointer-events: none; transition: opacity .2s;
+  }
+  .overlay.show { opacity: 1; pointer-events: all; }
+  .popup {
+    background: var(--card); border-radius: 24px;
+    padding: 28px; width: 100%; max-width: 440px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    transform: translateY(20px) scale(0.96); transition: all .25s;
+    max-height: 90vh; overflow-y: auto;
+  }
+  .overlay.show .popup { transform: translateY(0) scale(1); }
+  .popup-header {
+    display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px;
+  }
+  .popup-title {
+    font-size: 17px; font-weight: 800; color: var(--text);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .popup-title .p-icon {
+    width: 36px; height: 36px; border-radius: 12px;
+    display: grid; place-items: center; font-size: 18px;
+  }
+  .popup-close {
+    width: 32px; height: 32px; border-radius: 10px;
+    background: var(--bg); border: none; cursor: pointer;
+    display: grid; place-items: center; font-size: 18px;
+    color: var(--text-muted); transition: all .15s;
+  }
+  .popup-close:hover { background: var(--border); color: var(--text); }
+
+  .form-group { margin-bottom: 16px; }
+  .form-label {
+    font-size: 12px; font-weight: 700; color: var(--text-muted);
+    text-transform: uppercase; letter-spacing: .5px; margin-bottom: 6px; display: block;
+  }
+  .form-input, .form-textarea, .form-select {
+    width: 100%; padding: 11px 14px; border-radius: var(--radius-sm);
+    border: 1.5px solid var(--border); background: var(--bg);
+    font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; font-weight: 500;
+    color: var(--text); transition: border-color .15s; outline: none;
+  }
+  .form-input:focus, .form-textarea:focus, .form-select:focus {
+    border-color: var(--blue); background: #fff;
+  }
+  .form-textarea { resize: vertical; min-height: 80px; }
+  .form-toggle {
+    display: flex; align-items: center; gap: 10px; cursor: pointer;
+    padding: 10px 14px; border-radius: var(--radius-sm); background: var(--bg);
+    border: 1.5px solid var(--border); transition: all .15s;
+  }
+  .form-toggle input { display: none; }
+  .toggle-track {
+    width: 36px; height: 20px; border-radius: 10px; background: var(--border);
+    position: relative; transition: background .2s; flex-shrink: 0;
+  }
+  .toggle-track::after {
+    content: ''; position: absolute; top: 2px; left: 2px;
+    width: 16px; height: 16px; border-radius: 50%; background: #fff;
+    transition: transform .2s; box-shadow: 0 1px 4px rgba(0,0,0,.2);
+  }
+  input:checked + .toggle-track { background: var(--blue); }
+  input:checked + .toggle-track::after { transform: translateX(16px); }
+  .toggle-label { font-size: 13px; font-weight: 600; color: var(--text); }
+
+  .btn-primary {
+    width: 100%; padding: 13px; border-radius: var(--radius-sm);
+    background: var(--blue); color: #fff; border: none;
+    font-size: 15px; font-weight: 700; cursor: pointer; transition: all .15s;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    box-shadow: 0 3px 12px rgba(37,99,235,.35);
+  }
+  .btn-primary:hover { background: var(--blue-dark); transform: translateY(-1px); }
+
+  /* MATERIA GRID */
+  .materia-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
+  }
+  .materia-btn {
+    padding: 10px 6px; border-radius: var(--radius-sm);
+    border: 2px solid var(--border); background: var(--bg);
+    cursor: pointer; text-align: center; transition: all .15s;
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+  }
+  .materia-btn .m-icon { font-size: 20px; }
+  .materia-btn .m-name { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .3px; }
+  .materia-btn:hover { border-color: var(--blue); background: var(--blue-light); }
+  .materia-btn.selected { border-color: var(--blue); background: var(--blue-light); }
+
+  /* ALL NOTES POPUP */
+  .note-list-item {
+    padding: 12px 14px; border-radius: var(--radius-sm);
+    background: var(--bg); margin-bottom: 8px; border: 1px solid var(--border);
+    display: flex; align-items: flex-start; gap: 10px;
+  }
+  .note-list-text { flex: 1; font-size: 13px; font-weight: 500; line-height: 1.5; }
+  .note-list-date {
+    font-size: 11px; color: var(--text-muted); margin-top: 4px; font-weight: 500;
+  }
+  .note-deadline {
+    display: inline-flex; align-items: center; gap: 4px;
+    background: var(--amber-light); color: var(--amber);
+    border-radius: 6px; padding: 2px 7px; font-size: 11px; font-weight: 600; margin-top: 4px;
+  }
+  .btn-delete-note {
+    width: 26px; height: 26px; border-radius: 8px; border: none;
+    background: transparent; color: var(--text-light); cursor: pointer;
+    display: grid; place-items: center; font-size: 14px; transition: all .15s;
+    flex-shrink: 0;
+  }
+  .btn-delete-note:hover { background: var(--red-light); color: var(--red); }
+
+  /* WORK POPUP */
+  .work-detail-row {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 14px; border-radius: var(--radius-sm);
+    background: var(--bg); margin-bottom: 8px;
+  }
+  .work-detail-label { font-size: 12px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: .4px; min-width: 80px; }
+  .work-detail-value { font-size: 13px; font-weight: 600; color: var(--text); }
+  .countdown-badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 6px 12px; border-radius: 20px; font-size: 13px; font-weight: 700; margin-top: 4px;
+  }
+
+  /* deadline chip */
+  .chip-deadline {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 8px;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 1100px) {
+    .main { grid-template-columns: 1fr 1fr; }
+    .col-right { grid-column: span 2; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  }
+  @media (max-width: 700px) {
+    .main { grid-template-columns: 1fr; }
+    .col-right { grid-column: span 1; grid-template-columns: 1fr; }
+  }
+
+  /* scroll */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav id="top-nav">
+  <div class="nav-logo">
+    <img src="https://i.ibb.co/5Xt1fpRP/Mind-Space-Logo.png" width="130" alt=""></div>
+      
+  </div>
+  <div class="nav-links">
+    <a class="nav-link active" href="#"><i class="ti ti-layout-dashboard"></i> Início</a>
+    <a class="nav-link" href="#"><i class="ti ti-calendar"></i> Agenda</a>
+    <a class="nav-link" href="#"><i class="ti ti-chart-bar"></i> Desempenho</a>
+    <a class="nav-link" href="#"><i class="ti ti-settings"></i> Configurações</a>
+  </div>
+  <div class="nav-right">
+    <div class="nav-avatar">DL</div>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- LEFT COLUMN -->
+  <div style="display:flex;flex-direction:column;gap:20px;">
+
+    <!-- PROFILE -->
+    <div class="profile-card">
+      <div class="profile-card-bg"></div>
+      <div class="profile-card-content">
+        <div class="profile-avatar">DL</div>
+        <div>
+          <div class="profile-name">Daniel Lucca Costa</div>
+          <div class="profile-sub">Estudante</div>
+        </div>
+        <div class="profile-badges">
+          <div class="profile-badge"><i class="ti ti-star"></i> 8º Ano</div>
+          <div class="profile-badge"><i class="ti ti-calendar"></i> 2026</div>
+          <div class="profile-badge"><i class="ti ti-book-2"></i> 9 matérias</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WORKS -->
+    <div class="card">
+      <div class="sec-header">
+        <div class="sec-title">
+          <div class="icon-badge" style="background:#DBEAFE;color:#2563EB;"><i class="ti ti-clipboard-list"></i></div>
+          Trabalhos
+        </div>
+        <button class="btn-add" onclick="openPopup('work-add')" title="Adicionar trabalho">
+          <i class="ti ti-plus"></i>
+        </button>
+      </div>
+      <div id="works-list"><div class="no-items"><i class="ti ti-clipboard-x" style="font-size:22px;opacity:.4;"></i><br>Nenhum trabalho ainda</div></div>
+    </div>
+
+  </div>
+
+  <!-- CENTER COLUMN -->
+  <div style="display:flex;flex-direction:column;gap:20px;">
+
+    <!-- TODAY -->
+    <div class="card today-card">
+      <div>
+        <div class="today-header-title" id="today-weekday"></div>
+        <div class="today-header-date" id="today-date"></div>
+      </div>
+      <div id="today-blocks"></div>
+    </div>
+
+    <!-- NOTES -->
+    <div class="notes-card">
+      <div class="notes-header">
+        <div class="notes-title">
+          <i class="ti ti-notebook" style="font-size:20px;"></i> Anotações
+        </div>
+        <button class="btn-add-white" onclick="openPopup('note-add')" title="Nova anotação">
+          <i class="ti ti-plus"></i>
+        </button>
+      </div>
+      <div id="note-recent-area">
+        <div style="color:rgba(255,255,255,.6);font-size:13px;font-weight:500;padding:8px 0;">Nenhuma anotação ainda</div>
+      </div>
+      <button class="btn-ver-todas" onclick="openPopup('notes-all')" style="margin-top:10px;">
+        Ver todas <i class="ti ti-arrow-right" style="font-size:14px;"></i>
+      </button>
+    </div>
+
+  </div>
+
+  <!-- RIGHT COLUMN -->
+  <div class="col-right" style="display:flex;flex-direction:column;gap:20px;">
+
+    <!-- HOMEWORK -->
+    <div class="card">
+      <div class="sec-header">
+        <div class="sec-title">
+          <div class="icon-badge" style="background:#dbeafe;color:#2563EB;"><i class="ti ti-clock-hour-4"></i></div>
+          Deveres Pendentes
+        </div>
+      </div>
+      <div id="hw-list"><div class="no-items"><i class="ti ti-checks" style="font-size:22px;opacity:.4;"></i><br>Nenhum dever pendente</div></div>
+      <button class="btn-add-hw" onclick="openPopup('hw-add')">
+        <i class="ti ti-plus"></i> Adicionar dever
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===== POPUPS ===== -->
+<div class="overlay" id="overlay" onclick="overlayClick(event)">
+  <div class="popup" id="popup-content"></div>
+</div>
+
+<script>
+// ===================== DATA =====================
+const MATERIAS = [
+  { id:'portugues',    label:'Português',        icon:'ti-book-2',     color:'#DB2777', bg:'#FCE7F3' },
+  { id:'matematica',   label:'Matemática',       icon:'ti-math',       color:'#7C3AED', bg:'#EDE9FE' },
+  { id:'ciencias',     label:'Ciências',         icon:'ti-microscope', color:'#16A34A', bg:'#DCFCE7' },
+  { id:'geografia',    label:'Geografia',        icon:'ti-world',      color:'#0284C7', bg:'#E0F2FE' },
+  { id:'historia',     label:'História',         icon:'ti-hourglass',  color:'#D97706', bg:'#FEF3C7' },
+  { id:'textual',      label:'Prod. Textual',    icon:'ti-pencil',     color:'#EA580C', bg:'#FFEDD5' },
+  { id:'ingles',       label:'Inglês',           icon:'ti-language',   color:'#0D9488', bg:'#CCFBF1' },
+  { id:'espanhol',     label:'Espanhol',         icon:'ti-flag-3',     color:'#4338CA', bg:'#E0E7FF' },
+  { id:'filosofia',    label:'Filosofia',        icon:'ti-brain',      color:'#64748B', bg:'#F1F5F9' },
+];
+
+function getMateria(id){ return MATERIAS.find(m=>m.id===id)||MATERIAS[0]; }
+
+let notes = JSON.parse(localStorage.getItem('notes')||'[]');
+let homeworks = JSON.parse(localStorage.getItem('homeworks')||'[]');
+let works = JSON.parse(localStorage.getItem('works')||'[]');
+
+function save(){
+  localStorage.setItem('notes', JSON.stringify(notes));
+  localStorage.setItem('homeworks', JSON.stringify(homeworks));
+  localStorage.setItem('works', JSON.stringify(works));
+}
+
+// ===================== DATE =====================
+const WEEKDAYS = ['Domingo','Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado'];
+const MONTHS = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+const now = new Date();
+const todayWd = now.getDay(); // 0=sun,1=mon,...
+const todayStr = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
+
+function fmtDate(d){
+  const p = d.split('-');
+  return `${p[2]}/${p[1]}`;
+}
+function fmtDateLong(d){
+  const p = d.split('-');
+  return `${p[2]} de ${MONTHS[parseInt(p[1])-1]} de ${p[0]}`;
+}
+function daysLeft(deadline){
+  const a = new Date(todayStr+'T00:00:00'), b = new Date(deadline+'T00:00:00');
+  return Math.round((b-a)/(1000*60*60*24));
+}
+
+// ===================== TODAY RENDER =====================
+function renderToday(){
+  document.getElementById('today-weekday').textContent = `Hoje (${WEEKDAYS[todayWd]} / ${now.getDate()} de ${MONTHS[now.getMonth()]}),`;
+  document.getElementById('today-date').textContent = now.getFullYear();
+
+  const blocks = [];
+
+  // Weekday activity
+  const acts = {
+    1: { label:'Estudar para', icon:'ti-books', color:'#16A34A', bg:'#DCFCE7', value:'Matéria opcional', sub:'Vamos estudar!' },
+    2: { label:'Faça uma', icon:'ti-pencil', color:'#EA580C', bg:'#FFEDD5', value:'Redação', sub:'Pratique sua escrita hoje' },
+    4: { label:'Estudar para', icon:'ti-hourglass', color:'#D97706', bg:'#FEF3C7', value:'História', sub:'Entenda o capítulo de história!' },
+    5: { label:'Estudar para', icon:'ti-world', color:'#0284C7', bg:'#E0F2FE', value:'Geografia', sub:'Revisa e estude geografia!' },
+  };
+  if(acts[todayWd]){
+    const a = acts[todayWd];
+    blocks.push(`
+      <div class="today-block">
+        <div class="today-block-icon" style="background:${a.bg};color:${a.color};">
+          <i class="ti ${a.icon}"></i>
+        </div>
+        <div class="today-block-content">
+          <div class="today-block-label">${a.label}</div>
+          <div class="today-block-value" style="color:${a.color};">${a.value}</div>
+          <div class="today-block-sub">${a.sub}</div>
+        </div>
+      </div>`);
+  }
+
+  // Works due today
+  const dueToday = works.filter(w=>w.deadline===todayStr);
+  dueToday.forEach(w=>{
+    const m = getMateria(w.materia);
+    blocks.push(`
+      <div class="today-block" style="border:1.5px solid ${m.bg};">
+        <div class="today-block-icon" style="background:${m.bg};color:${m.color};">
+          <i class="ti ${m.icon}"></i>
+        </div>
+        <div class="today-block-content">
+          <div class="today-block-label">⚠ Entrega hoje</div>
+          <div class="today-block-value">${w.title}</div>
+          <div class="today-block-sub">${m.label}</div>
+        </div>
+      </div>`);
+  });
+
+  // Most recent note for today
+  const todayNote = notes.find(n=>n.deadline===todayStr||(!n.deadline && n.created===todayStr));
+  if(todayNote){
+    blocks.push(`
+      <div class="today-block" style="background:#EEF2F9;">
+        <div class="today-block-icon" style="background:#DBEAFE;color:#2563EB;">
+          <i class="ti ti-notebook"></i>
+        </div>
+        <div class="today-block-content">
+          <div class="today-block-label">Anotação do dia</div>
+          <div class="today-block-value" style="font-weight:500;font-size:13px;">${todayNote.text}</div>
+        </div>
+      </div>`);
+  }
+
+  if(!blocks.length){
+    blocks.push(`
+      <div class="today-block">
+        <div class="today-block-icon" style="background:#DCFCE7;color:#16A34A;"><i class="ti ti-sun"></i></div>
+        <div class="today-block-content">
+          <div class="today-block-label">Dica do dia</div>
+          <div class="today-block-value">Tudo em ordem!</div>
+          <div class="today-block-sub">Aproveite o dia e estude um pouco</div>
+        </div>
+      </div>`);
+  }
+
+  document.getElementById('today-blocks').innerHTML = blocks.join('');
+}
+
+// ===================== NOTES RENDER =====================
+function renderNotes(){
+  const area = document.getElementById('note-recent-area');
+  if(!notes.length){
+    area.innerHTML = '<div style="color:rgba(255,255,255,.6);font-size:13px;font-weight:500;padding:8px 0;">Nenhuma anotação ainda</div>';
+    return;
+  }
+  const last = notes[notes.length-1];
+  area.innerHTML = `
+    <div style="font-size:11px;color:rgba(255,255,255,.65);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">Mais recente:</div>
+    <div class="note-recent">
+      <div class="note-recent-text">${last.text}</div>
+      <div class="note-recent-date">${fmtDate(last.created)}${last.deadline?' · prazo: '+fmtDate(last.deadline):''}</div>
+    </div>`;
+}
+
+// ===================== HOMEWORK RENDER =====================
+function renderHW(){
+  const list = document.getElementById('hw-list');
+  if(!homeworks.length){
+    list.innerHTML = '<div class="no-items"><i class="ti ti-checks" style="font-size:22px;opacity:.4;"></i><br>Nenhum dever pendente</div>';
+    return;
+  }
+  list.innerHTML = homeworks.map((h,i)=>{
+    const m = getMateria(h.materia);
+    return `
+      <div class="hw-item" id="hw-${i}">
+        <div class="hw-subject-icon" style="background:${m.bg};color:${m.color};">
+          <i class="ti ${m.icon}"></i>
+        </div>
+        <div class="hw-content">
+          <div class="hw-subject" style="color:${m.color};">${m.label}</div>
+          <div class="hw-text">${h.text}</div>
+        </div>
+        <div class="hw-check" onclick="checkHW(${i})" title="Marcar como feito">
+          <i class="ti ti-check"></i>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function checkHW(i){
+  const el = document.getElementById('hw-'+i);
+  if(!el) return;
+  const check = el.querySelector('.hw-check');
+  check.classList.add('checked');
+  el.classList.add('completing');
+  setTimeout(()=>{
+    el.style.transition = 'all .4s ease';
+    el.classList.add('removing');
+    setTimeout(()=>{
+      homeworks.splice(i,1); save(); renderHW();
+    },420);
+  },1400);
+}
+
+// ===================== WORKS RENDER =====================
+function renderWorks(){
+  const list = document.getElementById('works-list');
+  if(!works.length){
+    list.innerHTML = '<div class="no-items"><i class="ti ti-clipboard-x" style="font-size:22px;opacity:.4;"></i><br>Nenhum trabalho ainda</div>';
+    return;
+  }
+  list.innerHTML = works.map((w,i)=>{
+    const m = getMateria(w.materia);
+    const dl = daysLeft(w.deadline);
+    const urgency = dl<0?'#DC2626':dl===0?'#EA580C':dl<=3?'#D97706':'#16A34A';
+    return `
+      <div class="work-item">
+        <div class="work-item-icon" style="background:${m.bg};color:${m.color};">
+          <i class="ti ${m.icon}"></i>
+        </div>
+        <div class="work-item-info">
+          <div class="work-item-title">${w.title}</div>
+          <div class="work-item-meta" style="color:${urgency};">
+            ${dl<0?`Atrasado ${Math.abs(dl)}d`:dl===0?'Entrega hoje':dl===1?'Amanhã':`${dl} dias restantes`}
+          </div>
+        </div>
+        <button class="work-item-btn" onclick="openWorkDetail(${i})" title="Ver detalhes">
+          <i class="ti ti-external-link"></i>
+        </button>
+      </div>`;
+  }).join('');
+}
+
+// ===================== POPUP SYSTEM =====================
+let currentPopup = '';
+function openPopup(type, data){
+  currentPopup = type;
+  const overlay = document.getElementById('overlay');
+  const popup = document.getElementById('popup-content');
+  if(type==='note-add') popup.innerHTML = buildNoteAdd();
+  else if(type==='notes-all') popup.innerHTML = buildNotesAll();
+  else if(type==='hw-add') popup.innerHTML = buildHWAdd();
+  else if(type==='work-add') popup.innerHTML = buildWorkAdd();
+  else if(type==='work-detail') popup.innerHTML = buildWorkDetail(data);
+  overlay.classList.add('show');
+}
+function closePopup(){
+  document.getElementById('overlay').classList.remove('show');
+}
+function overlayClick(e){
+  if(e.target===document.getElementById('overlay')) closePopup();
+}
+
+// ===================== NOTE ADD =====================
+function buildNoteAdd(){
+  return `
+    <div class="popup-header">
+      <div class="popup-title">
+        <div class="p-icon" style="background:#DBEAFE;color:#2563EB;"><i class="ti ti-notebook"></i></div>
+        Nova Anotação
+      </div>
+      <button class="popup-close" onclick="closePopup()"><i class="ti ti-x"></i></button>
+    </div>
+    <div class="form-group">
+      <label class="form-label">O que você quer anotar?</label>
+      <textarea class="form-textarea" id="note-text" placeholder="Escreva sua anotação aqui..." rows="4"></textarea>
+    </div>
+    <div class="form-group">
+      <label class="form-toggle" onclick="toggleDeadline()">
+        <input type="checkbox" id="note-has-deadline">
+        <div class="toggle-track"></div>
+        <span class="toggle-label"><i class="ti ti-calendar-due" style="margin-right:4px;"></i>Definir data limite</span>
+      </label>
+    </div>
+    <div class="form-group" id="note-deadline-group" style="display:none;">
+      <label class="form-label">Data limite</label>
+      <input type="date" class="form-input" id="note-deadline" value="${todayStr}">
+    </div>
+    <button class="btn-primary" onclick="saveNote()"><i class="ti ti-device-floppy" style="margin-right:6px;"></i>Salvar anotação</button>`;
+}
+function toggleDeadline(){
+  const cb = document.getElementById('note-has-deadline');
+  const g = document.getElementById('note-deadline-group');
+  setTimeout(()=>{ g.style.display = cb.checked?'block':'none'; },10);
+}
+function saveNote(){
+  const text = document.getElementById('note-text').value.trim();
+  if(!text){ alert('Escreva algo na anotação!'); return; }
+  const hasD = document.getElementById('note-has-deadline').checked;
+  const deadline = hasD ? document.getElementById('note-deadline').value : null;
+  notes.push({ text, created: todayStr, deadline });
+  save(); renderNotes(); renderToday(); closePopup();
+}
+
+// ===================== NOTES ALL =====================
+function buildNotesAll(){
+  let html = `
+    <div class="popup-header">
+      <div class="popup-title">
+        <div class="p-icon" style="background:#DBEAFE;color:#2563EB;"><i class="ti ti-notes"></i></div>
+        Todas as Anotações
+      </div>
+      <button class="popup-close" onclick="closePopup()"><i class="ti ti-x"></i></button>
+    </div>`;
+  if(!notes.length){
+    html += '<div class="no-items" style="padding:30px 0;"><i class="ti ti-notebook" style="font-size:30px;opacity:.3;"></i><br>Nenhuma anotação ainda</div>';
+  } else {
+    html += '<div>';
+    notes.slice().reverse().forEach((n,ri)=>{
+      const i = notes.length-1-ri;
+      const dl = n.deadline ? `<div class="note-deadline"><i class="ti ti-calendar-due"></i> Prazo: ${fmtDateLong(n.deadline)}</div>` : '';
+      html += `
+        <div class="note-list-item">
+          <div style="flex:1;">
+            <div class="note-list-text">${n.text}</div>
+            <div class="note-list-date"><i class="ti ti-calendar" style="font-size:11px;"></i> Criada em ${fmtDateLong(n.created)}</div>
+            ${dl}
+          </div>
+          <button class="btn-delete-note" onclick="deleteNote(${i})" title="Excluir">
+            <i class="ti ti-trash"></i>
+          </button>
+        </div>`;
+    });
+    html += '</div>';
+  }
+  return html;
+}
+function deleteNote(i){
+  if(!confirm('Excluir esta anotação?')) return;
+  notes.splice(i,1); save(); renderNotes(); renderToday();
+  document.getElementById('popup-content').innerHTML = buildNotesAll();
+}
+
+// ===================== HW ADD =====================
+let selectedHWMateria = '';
+function buildHWAdd(){
+  selectedHWMateria = '';
+  const grid = MATERIAS.map(m=>`
+    <div class="materia-btn" id="mb-${m.id}" onclick="selectHWMateria('${m.id}')">
+      <div class="m-icon" style="color:${m.color};"><i class="ti ${m.icon}"></i></div>
+      <div class="m-name" style="color:${m.color};">${m.label}</div>
+    </div>`).join('');
+  return `
+    <div class="popup-header">
+      <div class="popup-title">
+        <div class="p-icon" style="background:#FEE2E2;color:#DC2626;"><i class="ti ti-clock-hour-4"></i></div>
+        Novo Dever
+      </div>
+      <button class="popup-close" onclick="closePopup()"><i class="ti ti-x"></i></button>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Matéria</label>
+      <div class="materia-grid">${grid}</div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Qual é o dever?</label>
+      <textarea class="form-textarea" id="hw-text" placeholder="Descreva o dever aqui..." rows="3"></textarea>
+    </div>
+    <button class="btn-primary" onclick="saveHW()"><i class="ti ti-plus" style="margin-right:6px;"></i>Adicionar dever</button>`;
+}
+function selectHWMateria(id){
+  document.querySelectorAll('.materia-btn').forEach(b=>b.classList.remove('selected'));
+  document.getElementById('mb-'+id).classList.add('selected');
+  selectedHWMateria = id;
+}
+function saveHW(){
+  if(!selectedHWMateria){ alert('Selecione uma matéria!'); return; }
+  const text = document.getElementById('hw-text').value.trim();
+  if(!text){ alert('Descreva o dever!'); return; }
+  homeworks.push({ materia: selectedHWMateria, text });
+  save(); renderHW(); closePopup();
+}
+
+// ===================== WORK ADD =====================
+let selectedWorkMateria = '';
+function buildWorkAdd(){
+  selectedWorkMateria = '';
+  const grid = MATERIAS.map(m=>`
+    <div class="materia-btn" id="wm-${m.id}" onclick="selectWorkMateria('${m.id}')">
+      <div class="m-icon" style="color:${m.color};"><i class="ti ${m.icon}"></i></div>
+      <div class="m-name" style="color:${m.color};">${m.label}</div>
+    </div>`).join('');
+  return `
+    <div class="popup-header">
+      <div class="popup-title">
+        <div class="p-icon" style="background:#DBEAFE;color:#2563EB;"><i class="ti ti-clipboard-list"></i></div>
+        Novo Trabalho
+      </div>
+      <button class="popup-close" onclick="closePopup()"><i class="ti ti-x"></i></button>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Nome do trabalho</label>
+      <input type="text" class="form-input" id="work-title" placeholder="Ex: Pesquisa sobre o Brasil Colônia">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Matéria</label>
+      <div class="materia-grid">${grid}</div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">O que é pra fazer?</label>
+      <textarea class="form-textarea" id="work-desc" placeholder="Descreva o que precisa ser feito..." rows="3"></textarea>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Data de entrega</label>
+      <input type="date" class="form-input" id="work-deadline" value="${todayStr}">
+    </div>
+    <button class="btn-primary" onclick="saveWork()"><i class="ti ti-plus" style="margin-right:6px;"></i>Adicionar trabalho</button>`;
+}
+function selectWorkMateria(id){
+  document.querySelectorAll('[id^="wm-"]').forEach(b=>b.classList.remove('selected'));
+  document.getElementById('wm-'+id).classList.add('selected');
+  selectedWorkMateria = id;
+}
+function saveWork(){
+  const title = document.getElementById('work-title').value.trim();
+  if(!title){ alert('Dê um nome ao trabalho!'); return; }
+  if(!selectedWorkMateria){ alert('Selecione uma matéria!'); return; }
+  const desc = document.getElementById('work-desc').value.trim();
+  const deadline = document.getElementById('work-deadline').value;
+  if(!deadline){ alert('Defina a data de entrega!'); return; }
+  works.push({ title, materia: selectedWorkMateria, desc, deadline });
+  save(); renderWorks(); renderToday(); closePopup();
+}
+
+// ===================== WORK DETAIL =====================
+function openWorkDetail(i){ openPopup('work-detail', i); }
+function buildWorkDetail(i){
+  const w = works[i];
+  const m = getMateria(w.materia);
+  const dl = daysLeft(w.deadline);
+  let countdownColor = '#16A34A', countdownBg = '#DCFCE7', countdownText = `${dl} dias restantes`, countdownIcon = 'ti-calendar-check';
+  if(dl<0){ countdownColor='#DC2626'; countdownBg='#FEE2E2'; countdownText=`Atrasado ${Math.abs(dl)} dia${Math.abs(dl)>1?'s':''}!`; countdownIcon='ti-alert-circle'; }
+  else if(dl===0){ countdownColor='#EA580C'; countdownBg='#FFEDD5'; countdownText='Entrega HOJE!'; countdownIcon='ti-alarm'; }
+  else if(dl===1){ countdownColor='#D97706'; countdownBg='#FEF3C7'; countdownText='Amanhã!'; countdownIcon='ti-clock-exclamation'; }
+  else if(dl<=3){ countdownColor='#D97706'; countdownBg='#FEF3C7'; }
+
+  return `
+    <div class="popup-header">
+      <div class="popup-title">
+        <div class="p-icon" style="background:${m.bg};color:${m.color};"><i class="ti ${m.icon}"></i></div>
+        ${w.title}
+      </div>
+      <button class="popup-close" onclick="closePopup()"><i class="ti ti-x"></i></button>
+    </div>
+    <div class="work-detail-row">
+      <span class="work-detail-label"><i class="ti ti-books" style="margin-right:4px;"></i>Matéria</span>
+      <span class="work-detail-value" style="color:${m.color};">${m.label}</span>
+    </div>
+    <div class="work-detail-row" style="align-items:flex-start;">
+      <span class="work-detail-label" style="padding-top:2px;"><i class="ti ti-list-check" style="margin-right:4px;"></i>O que fazer</span>
+      <span class="work-detail-value" style="font-weight:500;line-height:1.5;">${w.desc||'Nenhuma descrição'}</span>
+    </div>
+    <div class="work-detail-row">
+      <span class="work-detail-label"><i class="ti ti-calendar" style="margin-right:4px;"></i>Entrega</span>
+      <span class="work-detail-value">${fmtDateLong(w.deadline)}</span>
+    </div>
+    <div style="margin:12px 0 4px;">
+      <div class="countdown-badge" style="background:${countdownBg};color:${countdownColor};">
+        <i class="ti ${countdownIcon}"></i> ${countdownText}
+      </div>
+    </div>
+    <div style="margin-top:16px;display:flex;gap:8px;">
+      <button onclick="deleteWork(${i})" style="flex:1;padding:11px;border-radius:12px;border:1.5px solid #FEE2E2;background:#FFF5F5;color:#DC2626;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;">
+        <i class="ti ti-trash"></i> Excluir
+      </button>
+      <button onclick="closePopup()" style="flex:1;padding:11px;border-radius:12px;border:none;background:#2563EB;color:#fff;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;">
+        Fechar
+      </button>
+    </div>`;
+}
+function deleteWork(i){
+  if(!confirm('Excluir este trabalho?')) return;
+  works.splice(i,1); save(); renderWorks(); renderToday(); closePopup();
+}
+
+// ===================== INIT =====================
+renderToday();
+renderNotes();
+renderHW();
+renderWorks();
+</script>
+</body>
+</html>

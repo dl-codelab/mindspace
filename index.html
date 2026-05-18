@@ -132,24 +132,36 @@
 
   /* ===== BOTTOM MOBILE NAV (MENU INFERIOR FLUTUANTE) ===== */
   .mobile-nav {
-    display: none; /* Escondido por padrão no Desktop */
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: calc(100% - 40px);
-    max-width: 400px;
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    border-radius: 24px;
-    padding: 10px 16px;
-    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.15);
-    z-index: 999;
-    justify-content: space-between;
-    align-items: center;
-  }
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  background: #ffffff;
+  border-top: 1px solid var(--border);
+  display: flex; /* Mantém em linha */
+  align-items: center;
+  justify-content: space-between;
+  padding: 0; /* Remove paddings laterais para não esmagar */
+  z-index: 999;
+}
+
+.mobile-nav-btn {
+  flex: 1; /* O segredo está aqui: cada botão vai expandir e ocupar exatamente metade (50%) */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  gap: 4px;
+  cursor: pointer;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+}
 
   .mobile-link {
     display: flex;
@@ -586,11 +598,17 @@
   </div>
 </nav>
 
-<div class="mobile-nav">
-  <a class="mobile-link active" href="#"><i class="ti ti-layout-dashboard"></i>Início</a>
-  <a class="mobile-link" href="configuracoes.html"><i class="ti ti-settings"></i>Configurações</a>
-</div>
-
+nav class="mobile-nav">
+  <button class="mobile-nav-btn active" onclick="window.location.href='index.html'">
+    <i class="ti ti-home"></i>
+    <span>Início</span>
+  </button>
+  <button class="mobile-nav-btn" onclick="window.location.href='configuracoes.html'">
+    <i class="ti ti-settings"></i>
+    <span>Configurações</span>
+  </button>
+</nav>
+  
 <div class="main">
 
   <div style="display:flex;flex-direction:column;gap:20px;">
@@ -1305,19 +1323,27 @@ renderWorks();
 loadUserSchedule(); // Carrega agenda personalizada do Firebase e depois renderiza Today
 
 // ===================== ESCUTA EM TEMPO REAL (FIREBASE) =====================
+// ===================== ESCUTA EM TEMPO REAL CORRIGIDA (FIREBASE) =====================
 const userRef = ref(db, `usuarios/${storageKey}`);
 onValue(userRef, (snapshot) => {
   if (snapshot.exists()) {
     const data = snapshot.val();
+    
+    // Só atualiza as variáveis se elas de facto existirem no Firebase
     notes = data.notes || [];
     homeworks = data.homeworks || [];
     works = data.works || [];
-    if(data.schedule) userSchedule = data.schedule;
     
-    // Atualiza o espelho local do navegador com as informações mais frescas vinda das nuvens
+    if (data.schedule) {
+      userSchedule = data.schedule;
+      // Garante que a agenda vinda do telemóvel seja guardada no cache do PC também
+      localStorage.setItem(`mindspace_schedule_${storageKey}`, JSON.stringify(userSchedule));
+    }
+    
+    // Atualiza o espelho do banco de dados local com segurança
     localStorage.setItem(`mindspace_db_${storageKey}`, JSON.stringify({ notes, homeworks, works }));
     
-    // Executa a renderização atualizada
+    // Força todas as telas a redesenharem com os dados novos da nuvem
     renderToday();
     renderNotes();
     renderHW();

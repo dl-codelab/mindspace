@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MindSpace | Configurações</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<link rel="icon" type="image/png" href="https://i.ibb.co/fs6QsSL/FAVICON.png?v=3">
+<style>
+  :root {
+    --blue: #2563EB;
+    --blue-dark: #1D4ED8;
+    --blue-light: #DBEAFE;
+    --blue-mid: #3B82F6;
+    --green: #16A34A;
+    --green-light: #DCFCE7;
+    --red: #E11D48;
+    --red-light: #FFE4E6;
+    --pink: #DB2777;
+    --pink-light: #FCE7F3;
+    --amber: #D97706;
+    --amber-light: #FEF3C7;
+    --purple: #7C3AED;
+    --purple-light: #EDE9FE;
+    --teal: #0D9488;
+    --teal-light: #CCFBF1;
+    --orange: #EA580C;
+    --orange-light: #FFEDD5;
+    --sky: #0284C7;
+    --sky-light: #E0F2FE;
+    --indigo: #4338CA;
+    --indigo-light: #E0E7FF;
+    --bg: #EEF2F9;
+    --card: #FFFFFF;
+    --text: #0F172A;
+    --text-muted: #64748B;
+    --text-light: #94A3B8;
+    --border: #E2E8F0;
+    --radius: 20px;
+    --radius-sm: 12px;
+    --shadow: 0 2px 12px rgba(0,0,0,0.06);
+    --shadow-md: 0 4px 24px rgba(0,0,0,0.10);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding-bottom: 60px;
+  }
+
+  /* ===== TOP NAV ===== */
+  #top-nav {
+    height: 56px;
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    padding: 0 28px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+  }
+  #top-nav .nav-logo { flex: 1; display: flex; align-items: center; gap: 8px; }
+  #top-nav .nav-links { display: flex; justify-content: center; gap: 2px; flex: 1; }
+  #top-nav .nav-link {
+    padding: 6px 14px; border-radius: 10px;
+    font-size: 14px; font-weight: 500; color: var(--text-muted);
+    cursor: pointer; transition: all .15s; text-decoration: none;
+  }
+  #top-nav .nav-link:hover { background: var(--bg); color: var(--text); }
+  #top-nav .nav-link.active { background: var(--blue-light); color: var(--blue); }
+  #top-nav .nav-right {
+    display: flex; align-items: center; justify-content: flex-end; gap: 10px; flex: 1;
+  }
+  #top-nav .nav-avatar {
+    width: 34px; height: 34px; background: var(--blue); border-radius: 50%;
+    display: grid; place-items: center; color: #fff; font-weight: 700;
+    font-size: 13px; cursor: pointer;
+  }
+
+  /* ===== MOBILE NAV ===== */
+  .mobile-nav {
+    display: none;
+    position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+    width: calc(100% - 40px); max-width: 400px;
+    background: rgba(255,255,255,0.85); backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 24px; padding: 10px 16px;
+    box-shadow: 0 10px 30px rgba(15,23,42,0.15);
+    z-index: 999; justify-content: space-between; align-items: center;
+  }
+  .mobile-link {
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+    color: var(--text-muted); text-decoration: none; font-size: 11px;
+    font-weight: 600; padding: 6px 12px; border-radius: 16px; transition: all 0.2s ease;
+  }
+  .mobile-link i { font-size: 20px; }
+  .mobile-link.active { color: var(--blue); background: var(--blue-light); }
+
+  /* ===== PAGE LAYOUT ===== */
+  .page {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 32px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .page-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .page-header-icon {
+    width: 52px; height: 52px; border-radius: 16px;
+    background: linear-gradient(135deg, var(--blue) 0%, #60A5FA 100%);
+    display: grid; place-items: center; font-size: 24px; color: #fff;
+    box-shadow: 0 4px 16px rgba(37,99,235,.3);
+    flex-shrink: 0;
+  }
+  .page-header-text h1 { font-size: 26px; font-weight: 800; color: var(--text); letter-spacing: -0.5px; }
+  .page-header-text p { font-size: 14px; color: var(--text-muted); font-weight: 500; margin-top: 2px; }
+
+  /* ===== CARDS ===== */
+  .card {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 28px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+  }
+  .card-header {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 24px;
+    padding-bottom: 18px; border-bottom: 1px solid var(--border);
+  }
+  .card-header-icon {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: grid; place-items: center; font-size: 18px; flex-shrink: 0;
+  }
+  .card-header-text h2 { font-size: 16px; font-weight: 700; color: var(--text); }
+  .card-header-text p { font-size: 13px; color: var(--text-muted); font-weight: 500; margin-top: 2px; }
+
+  /* ===== PROFILE SECTION ===== */
+  .profile-hero {
+    background: linear-gradient(145deg, #1E3A8A 0%, #2563EB 60%, #3B82F6 100%);
+    border-radius: var(--radius);
+    padding: 0;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    position: relative;
+  }
+  .profile-hero-bg {
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 200'%3E%3Ccircle cx='680' cy='40' r='160' fill='%231D4ED8' opacity='.4'/%3E%3Ccircle cx='600' cy='160' r='80' fill='%2393C5FD' opacity='.15'/%3E%3Ccircle cx='100' cy='180' r='100' fill='%231E40AF' opacity='.3'/%3E%3Ccircle cx='200' cy='-30' r='80' fill='%2360A5FA' opacity='.2'/%3E%3C/svg%3E") no-repeat center/cover;
+  }
+  .profile-hero-content {
+    position: relative; z-index: 1;
+    padding: 28px 32px;
+    display: flex;
+    align-items: center;
+    gap: 22px;
+  }
+  .profile-avatar-big {
+    width: 72px; height: 72px; border-radius: 22px;
+    background: rgba(147,197,253,0.25); border: 2px solid rgba(255,255,255,0.4);
+    display: grid; place-items: center;
+    font-size: 28px; font-weight: 800; color: #fff;
+    backdrop-filter: blur(8px);
+    flex-shrink: 0;
+    letter-spacing: -1px;
+  }
+  .profile-info { flex: 1; }
+  .profile-info-name { font-size: 24px; font-weight: 800; color: #fff; letter-spacing: -0.5px; }
+  .profile-info-user { font-size: 14px; color: rgba(255,255,255,0.7); font-weight: 500; margin-top: 3px; }
+  .profile-info-badges { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+  .profile-info-badge {
+    padding: 4px 12px; border-radius: 20px;
+    background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25);
+    font-size: 12px; font-weight: 600; color: #fff;
+    display: flex; align-items: center; gap: 5px;
+    backdrop-filter: blur(4px);
+  }
+  .btn-logout {
+    display: flex; align-items: center; gap: 8px;
+    padding: 10px 18px; border-radius: 12px;
+    background: rgba(255,255,255,0.15); border: 1.5px solid rgba(255,255,255,0.3);
+    color: #fff; font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 14px; font-weight: 700; cursor: pointer;
+    transition: all .2s; backdrop-filter: blur(8px);
+    flex-shrink: 0;
+    text-decoration: none;
+  }
+  .btn-logout:hover { background: rgba(225,29,72,0.5); border-color: rgba(255,255,255,0.5); transform: translateY(-1px); }
+
+  /* ===== SCHEDULE SECTION ===== */
+  .days-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+  .day-chip {
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+    padding: 10px 6px;
+    border-radius: 14px;
+    border: 2px solid var(--border);
+    background: var(--bg);
+    cursor: pointer;
+    transition: all .2s;
+    user-select: none;
+  }
+  .day-chip:hover { border-color: var(--blue); background: var(--blue-light); }
+  .day-chip.selected { border-color: var(--blue); background: var(--blue-light); }
+  .day-chip-abbr { font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  .day-chip.selected .day-chip-abbr { color: var(--blue); }
+  .day-chip-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--border);
+    transition: all .2s;
+  }
+  .day-chip.selected .day-chip-dot { background: var(--blue); }
+
+  .day-config-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .day-config-item {
+    background: var(--bg);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    transition: all .2s;
+  }
+  .day-config-header {
+    display: flex; align-items: center; gap: 12px;
+    padding: 14px 16px;
+    cursor: pointer;
+  }
+  .day-config-header:hover { background: #e8edf7; }
+  .day-config-day-badge {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: var(--blue-light); color: var(--blue);
+    display: grid; place-items: center;
+    font-size: 13px; font-weight: 800;
+    flex-shrink: 0;
+  }
+  .day-config-label { flex: 1; font-size: 14px; font-weight: 700; color: var(--text); }
+  .day-config-preview { font-size: 12px; color: var(--text-muted); font-weight: 500; }
+  .day-config-arrow {
+    font-size: 16px; color: var(--text-light);
+    transition: transform .2s;
+  }
+  .day-config-item.open .day-config-arrow { transform: rotate(180deg); }
+
+  .day-config-body {
+    display: none;
+    padding: 0 16px 16px;
+    border-top: 1px solid var(--border);
+  }
+  .day-config-item.open .day-config-body { display: block; }
+
+  .materia-select-label {
+    font-size: 12px; font-weight: 700; color: var(--text-muted);
+    text-transform: uppercase; letter-spacing: 0.5px;
+    margin: 14px 0 10px;
+  }
+
+  .materia-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
+    margin-bottom: 12px;
+  }
+  .materia-btn {
+    padding: 10px 6px; border-radius: var(--radius-sm);
+    border: 2px solid var(--border); background: var(--card);
+    cursor: pointer; text-align: center; transition: all .15s;
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+  }
+  .materia-btn .m-icon { font-size: 20px; }
+  .materia-btn .m-name { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .3px; }
+  .materia-btn:hover { border-color: var(--blue); background: var(--blue-light); }
+  .materia-btn.selected { border-color: var(--blue); background: var(--blue-light); }
+
+  .custom-materia-wrap {
+    display: flex; align-items: center; gap: 8px;
+    margin-top: 4px;
+  }
+  .custom-materia-input {
+    flex: 1; padding: 10px 14px;
+    border-radius: var(--radius-sm); border: 2px solid var(--border);
+    background: var(--card); font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 13px; color: var(--text); font-weight: 500;
+    transition: border-color .15s; outline: none;
+  }
+  .custom-materia-input:focus { border-color: var(--blue); }
+
+  .sub-label { font-size: 12px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+
+  .study-note-input {
+    width: 100%; padding: 10px 14px;
+    border-radius: var(--radius-sm); border: 2px solid var(--border);
+    background: var(--card); font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 13px; color: var(--text); font-weight: 500;
+    transition: border-color .15s; outline: none;
+  }
+  .study-note-input:focus { border-color: var(--blue); }
+
+  /* ===== SAVE BUTTON ===== */
+  .btn-save {
+    width: 100%; padding: 14px;
+    border-radius: var(--radius-sm); border: none;
+    background: var(--blue); color: #fff;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 15px; font-weight: 700; cursor: pointer;
+    transition: all .2s; display: flex; align-items: center;
+    justify-content: center; gap: 8px;
+    box-shadow: 0 4px 14px rgba(37,99,235,.3);
+    margin-top: 20px;
+  }
+  .btn-save:hover { background: var(--blue-dark); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(37,99,235,.4); }
+  .btn-save:active { transform: translateY(0); }
+
+  /* ===== TOAST ===== */
+  .toast {
+    position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(80px);
+    background: #0F172A; color: #fff; padding: 12px 22px;
+    border-radius: 14px; font-size: 14px; font-weight: 600;
+    display: flex; align-items: center; gap: 8px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.25); z-index: 9999;
+    transition: transform .3s cubic-bezier(.34,1.56,.64,1), opacity .3s;
+    opacity: 0;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+  .toast.success { background: #16A34A; }
+  .toast.error { background: #DC2626; }
+
+  /* ===== EMPTY STATE ===== */
+  .empty-schedule {
+    text-align: center; padding: 32px 20px;
+    color: var(--text-light); font-size: 14px; font-weight: 500;
+  }
+  .empty-schedule i { font-size: 36px; opacity: .3; display: block; margin-bottom: 10px; }
+
+  /* ===== LOADING ===== */
+  .loading-spinner {
+    display: inline-block; width: 18px; height: 18px;
+    border: 2.5px solid rgba(255,255,255,0.4);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin .7s linear infinite;
+    flex-shrink: 0;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    #top-nav .nav-links { display: none; }
+    .mobile-nav { display: flex; }
+    body { padding-bottom: 100px; }
+    .page { padding: 20px 16px; }
+    .profile-hero-content { flex-direction: column; align-items: flex-start; gap: 16px; }
+    .btn-logout { width: 100%; justify-content: center; }
+    .days-grid { grid-template-columns: repeat(4, 1fr); }
+    .card { padding: 20px; }
+    .materia-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  @media (max-width: 480px) {
+    .days-grid { grid-template-columns: repeat(4, 1fr); }
+    .profile-avatar-big { width: 58px; height: 58px; font-size: 22px; }
+    .profile-info-name { font-size: 20px; }
+  }
+
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+</style>
+</head>
+<body>
+
+<nav id="top-nav">
+  <div class="nav-logo">
+    <img src="https://i.ibb.co/5Xt1fpRP/Mind-Space-Logo.png" width="130" alt="MindSpace">
+  </div>
+  <div class="nav-links">
+    <a class="nav-link" href="index.html"><i class="ti ti-layout-dashboard"></i> Início</a>
+    <a class="nav-link active" href="#"><i class="ti ti-settings"></i> Configurações</a>
+  </div>
+  <div class="nav-right">
+    <div class="nav-avatar" id="nav-avatar">MS</div>
+  </div>
+</nav>
+
+<div class="mobile-nav">
+  <a class="mobile-link" href="index.html"><i class="ti ti-layout-dashboard"></i>Início</a>
+  <a class="mobile-link" href="#"><i class="ti ti-calendar"></i>Agenda</a>
+  <a class="mobile-link" href="#"><i class="ti ti-chart-bar"></i>Resultados</a>
+  <a class="mobile-link active" href="#"><i class="ti ti-settings"></i>Config.</a>
+</div>
+
+<div class="page">
+
+  <div class="page-header">
+    <div class="page-header-icon"><i class="ti ti-settings-2"></i></div>
+    <div class="page-header-text">
+      <h1>Configurações</h1>
+      <p>Personalize sua experiência no MindSpace</p>
+    </div>
+  </div>
+
+  <div class="profile-hero">
+    <div class="profile-hero-bg"></div>
+    <div class="profile-hero-content">
+      <div class="profile-avatar-big" id="profile-avatar">MS</div>
+      <div class="profile-info">
+        <div class="profile-info-name" id="profile-name">Carregando...</div>
+        <div class="profile-info-user"><i class="ti ti-at" style="font-size:13px;margin-right:3px;"></i><span id="profile-username">...</span></div>
+        <div class="profile-info-badges">
+          <div class="profile-info-badge"><i class="ti ti-star"></i> 8º Ano</div>
+          <div class="profile-info-badge"><i class="ti ti-calendar"></i> 2026</div>
+          <div class="profile-info-badge"><i class="ti ti-book-2"></i> 9 matérias</div>
+        </div>
+      </div>
+      <a href="login.html" class="btn-logout" id="btn-logout">
+        <i class="ti ti-logout"></i> Sair da conta
+      </a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-header-icon" style="background:#DBEAFE;color:#2563EB;"><i class="ti ti-calendar-week"></i></div>
+      <div class="card-header-text">
+        <h2>Agenda de Estudos</h2>
+        <p>Defina o que estudar em cada dia da semana</p>
+      </div>
+    </div>
+
+    <p style="font-size:13px;color:var(--text-muted);font-weight:500;margin-bottom:16px;">Selecione os dias em que você quer estudar:</p>
+
+    <div class="days-grid" id="days-grid">
+      </div>
+
+    <div id="day-config-list" class="day-config-list">
+      <div class="empty-schedule">
+        <i class="ti ti-calendar-off"></i>
+        Selecione pelo menos um dia acima para configurar os estudos.
+      </div>
+    </div>
+
+    <button class="btn-save" id="btn-save">
+      <i class="ti ti-device-floppy"></i> Salvar configurações
+    </button>
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getDatabase, ref, set, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+const firebaseConfig = {
+  databaseURL: "https://mindspace-7f8e7-default-rtdb.firebaseio.com/"
+};
+
+// ===================== AUTH CHECK =====================
+const isLogged = localStorage.getItem('mindspace_logged_in') === 'true';
+if (!isLogged) window.location.href = 'login.html';
+
+const storageKey = localStorage.getItem('mindspace_storage_key') || 'daniel';
+const currentName = localStorage.getItem('mindspace_current_name') || 'Usuário MindSpace';
+const currentInitials = localStorage.getItem('mindspace_current_initials') || 'MS';
+
+// Preenche dados do perfil de imediato de forma segura
+const elName = document.getElementById('profile-name');
+const elUser = document.getElementById('profile-username');
+const elAvatar = document.getElementById('profile-avatar');
+const navAvatar = document.getElementById('nav-avatar');
+
+if(elName) elName.textContent = currentName;
+if(elUser) elUser.textContent = storageKey;
+if(elAvatar) elAvatar.textContent = currentInitials;
+if(navAvatar) navAvatar.textContent = currentInitials;
+
+// Logout
+const btnLogout = document.getElementById('btn-logout');
+if(btnLogout) {
+  btnLogout.addEventListener('click', (e) => {
+    e.preventDefault();
+    localStorage.clear();
+    window.location.href = 'login.html';
+  });
+}
+
+// ===================== FIREBASE =====================
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+// ===================== MATERIAS =====================
+const MATERIAS = [
+  { id:'portugues',    label:'Português',        icon:'ti-book-2',     color:'#DB2777', bg:'#FCE7F3' },
+  { id:'matematica',   label:'Matemática',       icon:'ti-math',       color:'#7C3AED', bg:'#EDE9FE' },
+  { id:'ciencias',     label:'Ciências',         icon:'ti-microscope', color:'#16A34A', bg:'#DCFCE7' },
+  { id:'geografia',    label:'Geografia',        icon:'ti-world',      color:'#0284C7', bg:'#E0F2FE' },
+  { id:'historia',     label:'História',         icon:'ti-hourglass',  color:'#D97706', bg:'#FEF3C7' },
+  { id:'textual',      label:'Prod. Textual',    icon:'ti-pencil',     color:'#EA580C', bg:'#FFEDD5' },
+  { id:'ingles',       label:'Inglês',           icon:'ti-language',   color:'#0D9488', bg:'#CCFBF1' },
+  { id:'espanhol',     label:'Espanhol',         icon:'ti-flag-3',     color:'#4338CA', bg:'#E0E7FF' },
+  { id:'filosofia',    label:'Filosofia',        icon:'ti-brain',      color:'#64748B', bg:'#F1F5F9' },
+];
+
+const WEEKDAYS_FULL = ['Domingo','Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado'];
+const WEEKDAYS_SHORT = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+
+// ===================== STATE =====================
+let schedule = {};
+let selectedDays = new Set();
+
+// ===================== RENDER DAYS GRID =====================
+function renderDaysGrid() {
+  const grid = document.getElementById('days-grid');
+  if(!grid) return;
+  
+  grid.innerHTML = WEEKDAYS_SHORT.map((d, i) => `
+    <div class="day-chip ${selectedDays.has(i) ? 'selected' : ''}" data-day="${i}">
+      <div class="day-chip-abbr">${d}</div>
+      <div class="day-chip-dot"></div>
+    </div>
+  `).join('');
+
+  grid.querySelectorAll('.day-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      const day = parseInt(chip.dataset.day, 10);
+      if (selectedDays.has(day)) {
+        selectedDays.delete(day);
+        chip.classList.remove('selected');
+        delete schedule[day];
+      } else {
+        selectedDays.add(day);
+        chip.classList.add('selected');
+        if (!schedule[day]) schedule[day] = { materia: '', custom: '', note: '' };
+      }
+      renderDayConfigs();
+    });
+  });
+}
+
+// ===================== RENDER DAY CONFIGS =====================
+function renderDayConfigs() {
+  const container = document.getElementById('day-config-list');
+  if (!container) return;
+
+  if (selectedDays.size === 0) {
+    container.innerHTML = `
+      <div class="empty-schedule">
+        <i class="ti ti-calendar-off"></i>
+        Selecione pelo menos um dia acima para configurar os estudos.
+      </div>`;
+    return;
+  }
+
+  const sorted = [...selectedDays].sort((a, b) => a - b);
+  container.innerHTML = sorted.map(day => {
+    const cfg = schedule[day] || {};
+    const previewText = cfg.custom
+      ? `📝 ${cfg.custom}`
+      : (cfg.materia ? MATERIAS.find(m=>m.id===cfg.materia)?.label || '...' : 'Nenhuma matéria');
+    return `
+      <div class="day-config-item" id="dci-${day}">
+        <div class="day-config-header" data-day="${day}">
+          <div class="day-config-day-badge">${WEEKDAYS_SHORT[day]}</div>
+          <div>
+            <div class="day-config-label">${WEEKDAYS_FULL[day]}</div>
+            <div class="day-config-preview" id="preview-${day}">${previewText}</div>
+          </div>
+          <i class="ti ti-chevron-down day-config-arrow"></i>
+        </div>
+        <div class="day-config-body" id="body-${day}">
+          <div class="materia-select-label">Escolha a matéria:</div>
+          <div class="materia-grid" id="mg-${day}">
+            ${MATERIAS.map(m => `
+              <div class="materia-btn ${cfg.materia === m.id ? 'selected' : ''}" 
+                   data-day="${day}" data-mat="${m.id}">
+                <div class="m-icon" style="color:${m.color};"><i class="ti ${m.icon}"></i></div>
+                <div class="m-name" style="color:${m.color};">${m.label}</div>
+              </div>`).join('')}
+          </div>
+          <div style="margin-bottom:12px;">
+            <div class="sub-label">Ou matéria personalizada:</div>
+            <div class="custom-materia-wrap">
+              <i class="ti ti-edit" style="color:var(--text-muted);font-size:18px;flex-shrink:0;"></i>
+              <input type="text" class="custom-materia-input" id="custom-${day}"
+                placeholder="Ex: Redação, Revisão Geral..."
+                value="${cfg.custom || ''}">
+            </div>
+          </div>
+          <div>
+            <div class="sub-label">Observação (opcional):</div>
+            <input type="text" class="study-note-input" id="note-${day}"
+              placeholder="Ex: Focar no capítulo 3, Fazer exercícios..."
+              value="${cfg.note || ''}">
+          </div>
+        </div>
+      </div>`;
+  }).join('');
+
+  // Eventos internos dos itens renderizados
+  sorted.forEach(day => {
+    const header = document.querySelector(`#dci-${day} .day-config-header`);
+    if(header){
+      header.addEventListener('click', () => {
+        const item = document.getElementById(`dci-${day}`);
+        if(item) item.classList.toggle('open');
+      });
+    }
+
+    document.querySelectorAll(`#mg-${day} .materia-btn`).forEach(btn => {
+      btn.addEventListener('click', () => {
+        const mat = btn.dataset.mat;
+        document.querySelectorAll(`#mg-${day} .materia-btn`).forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        const customInput = document.getElementById(`custom-${day}`);
+        if(customInput) customInput.value = '';
+        if (!schedule[day]) schedule[day] = {};
+        schedule[day].materia = mat;
+        schedule[day].custom = '';
+        updatePreview(day);
+      });
+    });
+
+    const customInput = document.getElementById(`custom-${day}`);
+    if(customInput) {
+      customInput.addEventListener('input', () => {
+        if (!schedule[day]) schedule[day] = {};
+        schedule[day].custom = customInput.value;
+        if (customInput.value.trim()) {
+          document.querySelectorAll(`#mg-${day} .materia-btn`).forEach(b => b.classList.remove('selected'));
+          schedule[day].materia = '';
+        }
+        updatePreview(day);
+      });
+    }
+
+    const noteInput = document.getElementById(`note-${day}`);
+    if(noteInput) {
+      noteInput.addEventListener('input', () => {
+        if (!schedule[day]) schedule[day] = {};
+        schedule[day].note = noteInput.value;
+      });
+    }
+  });
+}
+
+function updatePreview(day) {
+  const cfg = schedule[day] || {};
+  const el = document.getElementById(`preview-${day}`);
+  if (!el) return;
+  const text = cfg.custom
+    ? `📝 ${cfg.custom}`
+    : (cfg.materia ? MATERIAS.find(m=>m.id===cfg.materia)?.label || '...' : 'Nenhuma matéria');
+  el.textContent = text;
+}
+
+// ===================== SAVE (BLINDADO COM FINALLY E TIMEOUT) =====================
+const btnSave = document.getElementById('btn-save');
+if (btnSave) {
+  btnSave.addEventListener('click', async () => {
+    // 1. Muda instantaneamente o botão para o modo carregando
+    btnSave.innerHTML = `<div class="loading-spinner"></div> Salvando...`;
+    btnSave.disabled = true;
+
+    try {
+      // 2. Monta o objeto de dados dentro do try de forma segura
+      const payload = {};
+      selectedDays.forEach(day => {
+        const customEl = document.getElementById(`custom-${day}`);
+        const noteEl = document.getElementById(`note-${day}`);
+        const cfg = schedule[day] || {};
+        payload[day] = {
+          materia: cfg.materia || '',
+          custom: customEl ? customEl.value.trim() : (cfg.custom || ''),
+          note: noteEl ? noteEl.value.trim() : (cfg.note || ''),
+        };
+      });
+
+      // 3. Executa a gravação com um limite de rede de 5 segundos para nunca travar infinitamente
+      await Promise.race([
+        set(ref(db, `usuarios/${storageKey}/schedule`), payload),
+        new Promise((_, reject) => setTimeout(() => reject(new Error('Tempo limite de rede excedido')), 5000))
+      ]);
+
+      showToast('✅ Configurações salvas com sucesso!', 'success');
+
+    } catch(e) {
+      console.error("Erro ao salvar:", e);
+      showToast('❌ Erro ao salvar. Verifique a conexão ou tente novamente.', 'error');
+    } finally {
+      // 4. O BLOCO FINALLY EXECUTA OBRIGATORIAMENTE EM QUALQUER CENÁRIO.
+      // Destrava o botão mesmo se houver erro ou perda total de internet!
+      btnSave.innerHTML = `<i class="ti ti-device-floppy"></i> Salvar configurações`;
+      btnSave.disabled = false;
+    }
+  });
+}
+
+// ===================== TOAST SEGURO =====================
+function showToast(msg, type = '') {
+  const t = document.getElementById('toast');
+  if(!t) {
+    alert(msg);
+    return;
+  }
+  t.textContent = msg;
+  t.className = 'toast ' + type;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// ===================== LOAD FROM FIREBASE DE FORMA FLUIDA =====================
+async function loadSchedule() {
+  // Renderiza a interface vazia imediatamente para o utilizador não ver uma tela travada
+  renderDaysGrid();
+  renderDayConfigs();
+
+  try {
+    // Busca dados no Firebase com limite de segurança de 5 segundos
+    const snap = await Promise.race([
+      get(ref(db, `usuarios/${storageKey}/schedule`)),
+      new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout de leitura')), 5000))
+    ]);
+
+    if (snap && snap.exists()) {
+      const data = snap.val();
+      schedule = {};
+      selectedDays = new Set();
+      Object.entries(data).forEach(([k, v]) => {
+        const dayIndex = parseInt(k, 10);
+        if(!isNaN(dayIndex)) {
+          schedule[dayIndex] = v;
+          selectedDays.add(dayIndex);
+        }
+      });
+      
+      // Atualiza a interface com as informações reais da nuvem
+      renderDaysGrid();
+      renderDayConfigs();
+    }
+  } catch(e) {
+    console.error('Erro ao carregar dados do Firebase:', e);
+    // Em caso de falha de rede, a interface continua limpa e utilizável localmente
+    renderDaysGrid();
+    renderDayConfigs();
+  }
+}
+
+// Inicializa o fluxo
+loadSchedule();
+</script>
+</body>
+</html>

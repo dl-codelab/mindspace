@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MindSpace | Entrar</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<link rel="icon" type="image/png" href="https://i.ibb.co/fs6QsSL/FAVICON.png?v=3">
+<style>
+  :root {
+    --blue: #2563EB;
+    --blue-dark: #1D4ED8;
+    --blue-light: #DBEAFE;
+    --blue-mid: #3B82F6;
+    --bg: #EEF2F9;
+    --card: #FFFFFF;
+    --text: #0F172A;
+    --text-muted: #64748B;
+    --text-light: #94A3B8;
+    --border: #E2E8F0;
+    --radius: 20px;
+    --radius-sm: 12px;
+    --shadow: 0 2px 12px rgba(0,0,0,0.06);
+    --shadow-md: 0 4px 24px rgba(0,0,0,0.10);
+    --red: #E11D48;
+    --red-light: #FFE4E6;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Background decorative blobs */
+  body::before {
+    content: '';
+    position: fixed;
+    top: -120px;
+    right: -120px;
+    width: 480px;
+    height: 480px;
+    background: radial-gradient(circle, rgba(37,99,235,0.12) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  body::after {
+    content: '';
+    position: fixed;
+    bottom: -100px;
+    left: -100px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(59,130,246,0.10) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  /* ===== WRAPPER ===== */
+  .login-wrapper {
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    animation: fadeUp 0.4s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== LOGO HEADER ===== */
+  .login-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo-pill {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(145deg, #1E3A8A 0%, #2563EB 60%, #3B82F6 100%);
+    padding: 10px 22px 10px 14px;
+    border-radius: 50px;
+    box-shadow: 0 4px 18px rgba(37,99,235,0.35);
+  }
+
+  .logo-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.2);
+    border: 1.5px solid rgba(255,255,255,0.35);
+    display: grid;
+    place-items: center;
+    font-size: 18px;
+    color: #fff;
+    backdrop-filter: blur(8px);
+  }
+
+  .logo-name {
+    font-size: 18px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.4px;
+  }
+
+  .login-subtitle {
+    font-size: 14px;
+    color: var(--text-muted);
+    font-weight: 500;
+    text-align: center;
+  }
+
+  /* ===== CARD ===== */
+  .login-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 32px 28px;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .card-title {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--text);
+    line-height: 1.2;
+  }
+
+  .card-title span {
+    color: var(--blue);
+  }
+
+  /* ===== FORM ===== */
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .form-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .input-icon {
+    position: absolute;
+    left: 14px;
+    font-size: 17px;
+    color: var(--text-light);
+    pointer-events: none;
+    transition: color 0.15s;
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 12px 14px 12px 42px;
+    border-radius: var(--radius-sm);
+    border: 1.5px solid var(--border);
+    background: var(--bg);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    transition: all 0.15s;
+    outline: none;
+  }
+
+  .form-input:focus {
+    border-color: var(--blue);
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(37,99,235,0.08);
+  }
+
+  .form-input:focus ~ .input-icon,
+  .input-wrapper:focus-within .input-icon {
+    color: var(--blue);
+  }
+
+  /* password toggle */
+  .pw-toggle {
+    position: absolute;
+    right: 12px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-light);
+    font-size: 17px;
+    display: grid;
+    place-items: center;
+    padding: 4px;
+    border-radius: 6px;
+    transition: color 0.15s;
+  }
+  .pw-toggle:hover { color: var(--text-muted); }
+
+  /* ===== ERROR MSG ===== */
+  .error-msg {
+    display: none;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 14px;
+    background: var(--red-light);
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(225,29,72,0.15);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--red);
+    animation: shake 0.3s ease;
+  }
+
+  .error-msg.show { display: flex; }
+
+  @keyframes shake {
+    0%,100% { transform: translateX(0); }
+    25% { transform: translateX(-6px); }
+    75% { transform: translateX(6px); }
+  }
+
+  /* ===== BTN ===== */
+  .btn-login {
+    width: 100%;
+    padding: 14px;
+    border-radius: var(--radius-sm);
+    background: var(--blue);
+    color: #fff;
+    border: none;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s;
+    box-shadow: 0 3px 14px rgba(37,99,235,0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .btn-login:hover {
+    background: var(--blue-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 5px 20px rgba(37,99,235,0.4);
+  }
+
+  .btn-login:active { transform: translateY(0); }
+
+  .btn-login.loading {
+    pointer-events: none;
+    opacity: 0.8;
+  }
+
+  /* spinner */
+  .spinner {
+    width: 18px;
+    height: 18px;
+    border: 2.5px solid rgba(255,255,255,0.4);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    display: none;
+  }
+  .btn-login.loading .spinner { display: block; }
+  .btn-login.loading .btn-text { display: none; }
+  .btn-login.loading .btn-arrow { display: none; }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ===== DIVIDER ===== */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-light);
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .divider::before,
+  .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ===== QUICK ACCESS ===== */
+  .quick-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
+  }
+
+  .quick-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  .quick-btn {
+    padding: 12px 8px;
+    border-radius: var(--radius-sm);
+    border: 1.5px solid var(--border);
+    background: var(--bg);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.15s;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  .quick-btn:hover {
+    border-color: var(--blue);
+    background: var(--blue-light);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(37,99,235,0.12);
+  }
+
+  .quick-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    font-size: 16px;
+    font-weight: 800;
+    color: #fff;
+    flex-shrink: 0;
+  }
+
+  .quick-name {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text);
+    text-align: center;
+    line-height: 1.2;
+  }
+
+  .quick-code {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text-muted);
+    font-family: monospace;
+  }
+
+  /* ===== FOOTER NOTE ===== */
+  .login-footer {
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-light);
+    font-weight: 500;
+  }
+
+  .login-footer i {
+    font-size: 13px;
+    vertical-align: -2px;
+    margin-right: 2px;
+  }
+
+  /* ===== SUCCESS OVERLAY ===== */
+  .success-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(15,23,42,0.55);
+    z-index: 300;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+  }
+  .success-overlay.show { display: flex; }
+
+  .success-popup {
+    background: var(--card);
+    border-radius: 24px;
+    padding: 36px 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    text-align: center;
+    animation: popIn 0.35s cubic-bezier(0.34,1.56,0.64,1) both;
+    max-width: 320px;
+    width: 90%;
+  }
+
+  @keyframes popIn {
+    from { opacity: 0; transform: scale(0.8); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+
+  .success-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 20px;
+    background: linear-gradient(145deg, #1E3A8A 0%, #2563EB 60%, #3B82F6 100%);
+    display: grid;
+    place-items: center;
+    font-size: 30px;
+    color: #fff;
+    box-shadow: 0 4px 18px rgba(37,99,235,0.35);
+  }
+
+  .success-title {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--text);
+  }
+
+  .success-sub {
+    font-size: 14px;
+    color: var(--text-muted);
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
+  .success-badge {
+    padding: 6px 16px;
+    border-radius: 50px;
+    background: var(--blue-light);
+    color: var(--blue);
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .progress-bar-wrap {
+    width: 100%;
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: var(--blue);
+    border-radius: 2px;
+    width: 0%;
+    animation: fillBar 1.8s ease forwards;
+  }
+  @keyframes fillBar {
+    to { width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- SUCCESS OVERLAY -->
+<div class="success-overlay" id="successOverlay">
+  <div class="success-popup">
+    <div class="success-icon"><i class="ti ti-check"></i></div>
+    <div class="success-title">Bem-vindo de volta! 🎉</div>
+    <div class="success-badge" id="successName">—</div>
+    <div class="success-sub">Carregando seu espaço de estudos...</div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill"></div></div>
+  </div>
+</div>
+
+<!-- MAIN LOGIN -->
+<div class="login-wrapper">
+
+  <!-- HEADER -->
+  <div class="login-header">
+    <div class="logo-pill">
+      <div class="logo-icon"><i class="ti ti-brain"></i></div>
+      <span class="logo-name">MindSpace</span>
+    </div>
+    <div class="login-subtitle">Gerenciamento de Estudos · 2026</div>
+  </div>
+
+  <!-- CARD -->
+  <div class="login-card">
+    <div class="card-title">Olá! <span>Entre na sua conta</span> 👋</div>
+
+    <!-- FORM -->
+    <div class="form-group">
+      <label class="form-label">Código de acesso</label>
+      <div class="input-wrapper">
+        <i class="ti ti-key input-icon" id="codeIcon"></i>
+        <input
+          type="password"
+          class="form-input"
+          id="codeInput"
+          placeholder="Digite seu código..."
+          autocomplete="off"
+          spellcheck="false"
+        >
+        <button class="pw-toggle" id="pwToggle" type="button" title="Mostrar/ocultar">
+          <i class="ti ti-eye" id="eyeIcon"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- ERROR -->
+    <div class="error-msg" id="errorMsg">
+      <i class="ti ti-alert-circle"></i>
+      Código incorreto. Tente novamente.
+    </div>
+
+    <!-- BTN -->
+    <button class="btn-login" id="btnLogin" type="button">
+      <div class="spinner"></div>
+      <span class="btn-text">Entrar no MindSpace</span>
+      <i class="ti ti-arrow-right btn-arrow"></i>
+    </button>
+
+    <!-- QUICK ACCESS -->
+   
+  <!-- FOOTER -->
+  <div class="login-footer">
+    <i class="ti ti-lock"></i> Seus dados ficam salvos só no seu navegador
+  </div>
+
+</div>
+
+<script>
+  // ===== CREDENCIAIS =====
+  const ACCOUNTS = {
+    'dlucca26':    { name: 'Daniel Lucca Costa',    initials: 'DL', storageKey: 'mindspace_dlucca26'    },
+    'anaetiene26': { name: 'Ana Clara Etiene',  initials: 'AE', storageKey: 'mindspace_anaetiene26' },
+    'manu26':      { name: 'Manuela Viana',        initials: 'MA', storageKey: 'mindspace_manu26'       },
+  };
+
+  // ===== ELEMENTS =====
+  const codeInput  = document.getElementById('codeInput');
+  const btnLogin   = document.getElementById('btnLogin');
+  const errorMsg   = document.getElementById('errorMsg');
+  const pwToggle   = document.getElementById('pwToggle');
+  const eyeIcon    = document.getElementById('eyeIcon');
+  const successOverlay = document.getElementById('successOverlay');
+  const successName    = document.getElementById('successName');
+
+  // Enter key
+  codeInput.addEventListener('keydown', e => {
+    if (e.key === 'Enter') doLogin();
+    errorMsg.classList.remove('show');
+  });
+
+  btnLogin.addEventListener('click', doLogin);
+
+  // Toggle password visibility
+  pwToggle.addEventListener('click', () => {
+    if (codeInput.type === 'password') {
+      codeInput.type = 'text';
+      eyeIcon.className = 'ti ti-eye-off';
+    } else {
+      codeInput.type = 'password';
+      eyeIcon.className = 'ti ti-eye';
+    }
+  });
+
+  // ===== LOGIN LOGIC =====
+  function doLogin() {
+    const code = codeInput.value.trim().toLowerCase();
+    if (!code) {
+      shakeInput();
+      return;
+    }
+    if (ACCOUNTS[code]) {
+      loginSuccess(code);
+    } else {
+      errorMsg.classList.add('show');
+      shakeInput();
+      codeInput.value = '';
+      codeInput.focus();
+    }
+  }
+
+  function quickLogin(code) {
+    codeInput.value = code;
+    errorMsg.classList.remove('show');
+    setTimeout(() => loginSuccess(code), 150);
+  }
+
+  function loginSuccess(code) {
+    const acc = ACCOUNTS[code];
+
+    // Save to localStorage
+    localStorage.setItem('mindspace_current_user', code);
+    localStorage.setItem('mindspace_current_name', acc.name);
+    localStorage.setItem('mindspace_current_initials', acc.initials);
+    localStorage.setItem('mindspace_storage_key', acc.storageKey);
+    localStorage.setItem('mindspace_logged_in', 'true');
+
+    // Show loading btn
+    btnLogin.classList.add('loading');
+
+    // Show success popup
+    successName.textContent = acc.name;
+    successOverlay.classList.add('show');
+
+    // Redirect after animation
+    setTimeout(() => {
+      // Redirect to main app (index.html)
+      window.location.href = 'index.html';
+    }, 2000);
+  }
+
+  function shakeInput() {
+    codeInput.style.borderColor = 'var(--red)';
+    codeInput.style.animation = 'shake 0.3s ease';
+    setTimeout(() => {
+      codeInput.style.borderColor = '';
+      codeInput.style.animation = '';
+    }, 400);
+  }
+
+  // Auto-focus
+  codeInput.focus();
+</script>
+</body>
+</html>

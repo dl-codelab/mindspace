@@ -681,17 +681,18 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getDatabase, ref, set, onValue, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
-// Substitua pelo objeto de configuração real do seu projeto Firebase Console
 const firebaseConfig = {
-  apiKey: "MUDE_AQUI_PELO_SEU_CONFIG",
-  authDomain: "MUDE_AQUI_PELO_SEU_CONFIG",
-  databaseURL: "MUDE_AQUI_PELO_SEU_CONFIG",
-  projectId: "MUDE_AQUI_PELO_SEU_CONFIG",
-  storageBucket: "MUDE_AQUI_PELO_SEU_CONFIG",
-  messagingSenderId: "MUDE_AQUI_PELO_SEU_CONFIG",
-  appId: "MUDE_AQUI_PELO_SEU_CONFIG"
+  apiKey: "AIzaSyCkoD_NBW5K1rBTAtj-pYBsdngpfjZuNS8",
+  authDomain: "mindspace-878fb.firebaseapp.com",
+  databaseURL: "https://mindspace-878fb-default-rtdb.firebaseio.com",
+  projectId: "mindspace-878fb",
+  storageBucket: "mindspace-878fb.firebasestorage.app",
+  messagingSenderId: "884928470815",
+  appId: "1:884928470815:web:3484a28a2dc06312b41a2a",
+  measurementId: "G-XSTGDNGY71"
 };
-  
+
+
 const isLogged = localStorage.getItem('mindspace_logged_in') === 'true';
 const storageKey = localStorage.getItem('mindspace_storage_key') || 'daniel'; 
 const currentName = localStorage.getItem('mindspace_current_name') || 'Usuário MindSpace';

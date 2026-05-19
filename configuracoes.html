@@ -673,46 +673,41 @@ function updatePreview(day) {
 }
 
 // ===================== SAVE (BLINDADO COM FINALLY E TIMEOUT) =====================
-const btnSave = document.getElementById('btn-save');
-if (btnSave) {
-  btnSave.addEventListener('click', async () => {
-    // 1. Muda instantaneamente o botão para o modo carregando
-    btnSave.innerHTML = `<div class="loading-spinner"></div> Salvando...`;
-    btnSave.disabled = true;
+// ===================== SAVE =====================
+document.getElementById('btn-save').addEventListener('click', async () => {
+  const btn = document.getElementById('btn-save');
+  btn.innerHTML = `<div class="loading-spinner"></div> Salvando...`;
+  btn.disabled = true;
 
-    try {
-      // 2. Monta o objeto de dados dentro do try de forma segura
-      const payload = {};
-      selectedDays.forEach(day => {
-        const customEl = document.getElementById(`custom-${day}`);
-        const noteEl = document.getElementById(`note-${day}`);
-        const cfg = schedule[day] || {};
-        payload[day] = {
-          materia: cfg.materia || '',
-          custom: customEl ? customEl.value.trim() : (cfg.custom || ''),
-          note: noteEl ? noteEl.value.trim() : (cfg.note || ''),
-        };
-      });
-
-      // 3. Executa a gravação com um limite de rede de 5 segundos para nunca travar infinitamente
-      await Promise.race([
-        set(ref(db, `usuarios/${storageKey}/schedule`), payload),
-        new Promise((_, reject) => setTimeout(() => reject(new Error('Tempo limite de rede excedido')), 5000))
-      ]);
-
-      showToast('✅ Configurações salvas com sucesso!', 'success');
-
-    } catch(e) {
-      console.error("Erro ao salvar:", e);
-      showToast('❌ Erro ao salvar. Verifique a conexão ou tente novamente.', 'error');
-    } finally {
-      // 4. O BLOCO FINALLY EXECUTA OBRIGATORIAMENTE EM QUALQUER CENÁRIO.
-      // Destrava o botão mesmo se houver erro ou perda total de internet!
-      btnSave.innerHTML = `<i class="ti ti-device-floppy"></i> Salvar configurações`;
-      btnSave.disabled = false;
-    }
+  // Monta o objeto final lendo o estado atual dos inputs da tela
+  const payload = {};
+  selectedDays.forEach(day => {
+    const customEl = document.getElementById(`custom-${day}`);
+    const noteEl = document.getElementById(`note-${day}`);
+    const cfg = schedule[day] || {};
+    payload[day] = {
+      materia: cfg.materia || '',
+      custom: customEl ? customEl.value.trim() : (cfg.custom || ''),
+      note: noteEl ? noteEl.value.trim() : (cfg.note || ''),
+    };
   });
-}
+
+  try {
+    // 1. Salva imediatamente no LocalStorage do dispositivo atual
+    localStorage.setItem(`mindspace_schedule_${storageKey}`, JSON.stringify(payload));
+
+    // 2. Envia para o Firebase de forma limpa e direta
+    await set(ref(db, `usuarios/${storageKey}/schedule`), payload);
+    showToast('✅ Configurações salvas com sucesso!', 'success');
+  } catch(e) {
+    // Se a rede falhar, os dados ainda estarão salvos no aparelho
+    showToast('⚠️ Salvo localmente! Sem ligação com o Firebase.', 'error');
+    console.error("Erro ao sincronizar com nuvem:", e);
+  }
+
+  btn.innerHTML = `<i class="ti ti-device-floppy"></i> Salvar configurações`;
+  btn.disabled = false;
+});
 
 // ===================== TOAST SEGURO =====================
 function showToast(msg, type = '') {

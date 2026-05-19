@@ -50,7 +50,7 @@
     background: var(--bg);
     color: var(--text);
     min-height: 100vh;
-    padding-bottom: 60px;
+    padding-bottom: 40px;
   }
 
   /* ===== TOP NAV ===== */
@@ -69,320 +69,150 @@
   #top-nav .nav-logo { flex: 1; display: flex; align-items: center; gap: 8px; }
   #top-nav .nav-links { display: flex; justify-content: center; gap: 2px; flex: 1; }
   #top-nav .nav-link {
-    padding: 6px 14px; border-radius: 10px;
-    font-size: 14px; font-weight: 500; color: var(--text-muted);
-    cursor: pointer; transition: all .15s; text-decoration: none;
+    padding: 6px 14px; border-radius: 10px; font-size: 14px; font-weight: 500;
+    color: var(--text-muted); cursor: pointer; transition: all .15s; text-decoration: none;
+    display: flex; align-items: center; gap: 6px;
   }
   #top-nav .nav-link:hover { background: var(--bg); color: var(--text); }
   #top-nav .nav-link.active { background: var(--blue-light); color: var(--blue); }
-  #top-nav .nav-right {
-    display: flex; align-items: center; justify-content: flex-end; gap: 10px; flex: 1;
-  }
+  #top-nav .nav-right { display: flex; align-items: center; justify-content: flex-end; gap: 10px; flex: 1; }
   #top-nav .nav-avatar {
     width: 34px; height: 34px; background: var(--blue); border-radius: 50%;
-    display: grid; place-items: center; color: #fff; font-weight: 700;
-    font-size: 13px; cursor: pointer;
+    display: grid; place-items: center; color: #fff; font-weight: 700; font-size: 13px;
   }
 
-  /* ===== MOBILE NAV ===== */
+  /* ===== BOTTOM MOBILE NAV ===== */
   .mobile-nav {
-    display: none;
-    position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-    width: calc(100% - 40px); max-width: 400px;
-    background: rgba(255,255,255,0.85); backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255,255,255,0.4);
-    border-radius: 24px; padding: 10px 16px;
-    box-shadow: 0 10px 30px rgba(15,23,42,0.15);
-    z-index: 999; justify-content: space-between; align-items: center;
+    position: fixed; bottom: 0; left: 0; right: 0; height: 64px;
+    background: #ffffff; border-top: 1px solid var(--border);
+    display: none; align-items: center; justify-content: space-between; padding: 0; z-index: 999;
   }
-  .mobile-link {
-    display: flex; flex-direction: column; align-items: center; gap: 4px;
-    color: var(--text-muted); text-decoration: none; font-size: 11px;
-    font-weight: 600; padding: 6px 12px; border-radius: 16px; transition: all 0.2s ease;
+  .mobile-nav-btn {
+    flex: 1; height: 100%; display: flex; flex-direction: column; align-items: center;
+    justify-content: center; background: none; border: none; color: var(--text-muted);
+    gap: 4px; cursor: pointer; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 11px; font-weight: 600;
   }
-  .mobile-link i { font-size: 20px; }
-  .mobile-link.active { color: var(--blue); background: var(--blue-light); }
+  .mobile-nav-btn.active { color: var(--blue); }
+  .mobile-nav-btn i { font-size: 20px; }
 
-  /* ===== PAGE LAYOUT ===== */
-  .page {
-    max-width: 860px;
-    margin: 0 auto;
-    padding: 32px 28px;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
+  /* ===== MAIN LAYOUT ===== */
+  .main {
+    display: grid; grid-template-columns: 320px 1fr; gap: 24px;
+    padding: 24px 28px; max-width: 1200px; margin: 0 auto;
   }
 
-  .page-header {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-  .page-header-icon {
-    width: 52px; height: 52px; border-radius: 16px;
-    background: linear-gradient(135deg, var(--blue) 0%, #60A5FA 100%);
-    display: grid; place-items: center; font-size: 24px; color: #fff;
-    box-shadow: 0 4px 16px rgba(37,99,235,.3);
-    flex-shrink: 0;
-  }
-  .page-header-text h1 { font-size: 26px; font-weight: 800; color: var(--text); letter-spacing: -0.5px; }
-  .page-header-text p { font-size: 14px; color: var(--text-muted); font-weight: 500; margin-top: 2px; }
-
-  /* ===== CARDS ===== */
-  .card {
-    background: var(--card);
-    border-radius: var(--radius);
-    padding: 28px;
-    box-shadow: var(--shadow);
-    border: 1px solid var(--border);
-  }
-  .card-header {
-    display: flex; align-items: center; gap: 12px; margin-bottom: 24px;
-    padding-bottom: 18px; border-bottom: 1px solid var(--border);
-  }
-  .card-header-icon {
-    width: 38px; height: 38px; border-radius: 12px;
-    display: grid; place-items: center; font-size: 18px; flex-shrink: 0;
-  }
-  .card-header-text h2 { font-size: 16px; font-weight: 700; color: var(--text); }
-  .card-header-text p { font-size: 13px; color: var(--text-muted); font-weight: 500; margin-top: 2px; }
-
-  /* ===== PROFILE SECTION ===== */
-  .profile-hero {
+  /* ===== PROFILE CARD ===== */
+  .profile-card {
     background: linear-gradient(145deg, #1E3A8A 0%, #2563EB 60%, #3B82F6 100%);
-    border-radius: var(--radius);
-    padding: 0;
-    overflow: hidden;
-    box-shadow: var(--shadow-md);
-    position: relative;
+    border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-md);
+    position: relative; height: fit-content;
   }
-  .profile-hero-bg {
+  .profile-card-bg {
     position: absolute; inset: 0;
-    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 200'%3E%3Ccircle cx='680' cy='40' r='160' fill='%231D4ED8' opacity='.4'/%3E%3Ccircle cx='600' cy='160' r='80' fill='%2393C5FD' opacity='.15'/%3E%3Ccircle cx='100' cy='180' r='100' fill='%231E40AF' opacity='.3'/%3E%3Ccircle cx='200' cy='-30' r='80' fill='%2360A5FA' opacity='.2'/%3E%3C/svg%3E") no-repeat center/cover;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Ccircle cx='320' cy='60' r='110' fill='%231D4ED8' opacity='.4'/%3E%3Ccircle cx='280' cy='180' r='70' fill='%2393C5FD' opacity='.15'/%3E%3Ccircle cx='60' cy='240' r='80' fill='%231E40AF' opacity='.3'/%3E%3C/svg%3E") no-repeat center/cover;
   }
-  .profile-hero-content {
-    position: relative; z-index: 1;
-    padding: 28px 32px;
-    display: flex;
-    align-items: center;
-    gap: 22px;
-  }
+  .profile-card-content { position: relative; z-index: 1; padding: 24px; display: flex; flex-direction: column; gap: 16px; }
   .profile-avatar-big {
-    width: 72px; height: 72px; border-radius: 22px;
-    background: rgba(147,197,253,0.25); border: 2px solid rgba(255,255,255,0.4);
-    display: grid; place-items: center;
-    font-size: 28px; font-weight: 800; color: #fff;
-    backdrop-filter: blur(8px);
-    flex-shrink: 0;
-    letter-spacing: -1px;
+    width: 64px; height: 64px; border-radius: 18px;
+    background: rgba(147,197,253,0.3); border: 2px solid rgba(255,255,255,0.4);
+    display: grid; place-items: center; font-size: 24px; font-weight: 800; color: #fff; backdrop-filter: blur(8px);
   }
-  .profile-info { flex: 1; }
-  .profile-info-name { font-size: 24px; font-weight: 800; color: #fff; letter-spacing: -0.5px; }
-  .profile-info-user { font-size: 14px; color: rgba(255,255,255,0.7); font-weight: 500; margin-top: 3px; }
-  .profile-info-badges { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
-  .profile-info-badge {
-    padding: 4px 12px; border-radius: 20px;
-    background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25);
-    font-size: 12px; font-weight: 600; color: #fff;
-    display: flex; align-items: center; gap: 5px;
-    backdrop-filter: blur(4px);
+  .profile-name { font-size: 20px; font-weight: 800; color: #fff; line-height: 1.2; }
+  .profile-sub { font-size: 13px; color: rgba(255,255,255,0.75); font-weight: 500; margin-top: 2px; }
+  .profile-badges { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px; }
+  .profile-badge {
+    padding: 4px 10px; border-radius: 20px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25);
+    font-size: 11px; font-weight: 600; color: #fff; display: flex; align-items: center; gap: 4px;
   }
   .btn-logout {
-    display: flex; align-items: center; gap: 8px;
-    padding: 10px 18px; border-radius: 12px;
-    background: rgba(255,255,255,0.15); border: 1.5px solid rgba(255,255,255,0.3);
-    color: #fff; font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 14px; font-weight: 700; cursor: pointer;
-    transition: all .2s; backdrop-filter: blur(8px);
-    flex-shrink: 0;
-    text-decoration: none;
+    width: 100%; padding: 11px; border-radius: var(--radius-sm); background: rgba(255,255,255,0.15);
+    color: #fff; border: 1px solid rgba(255,255,255,0.2); font-size: 13px; font-weight: 600;
+    cursor: pointer; transition: all .15s; display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 8px;
   }
-  .btn-logout:hover { background: rgba(225,29,72,0.5); border-color: rgba(255,255,255,0.5); transform: translateY(-1px); }
+  .btn-logout:hover { background: var(--red); border-color: transparent; }
 
-  /* ===== SCHEDULE SECTION ===== */
-  .days-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 8px;
-    margin-bottom: 24px;
-  }
-  .day-chip {
-    display: flex; flex-direction: column; align-items: center; gap: 4px;
-    padding: 10px 6px;
-    border-radius: 14px;
-    border: 2px solid var(--border);
-    background: var(--bg);
-    cursor: pointer;
-    transition: all .2s;
-    user-select: none;
-  }
-  .day-chip:hover { border-color: var(--blue); background: var(--blue-light); }
-  .day-chip.selected { border-color: var(--blue); background: var(--blue-light); }
-  .day-chip-abbr { font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
-  .day-chip.selected .day-chip-abbr { color: var(--blue); }
-  .day-chip-dot {
-    width: 8px; height: 8px; border-radius: 50%;
-    background: var(--border);
-    transition: all .2s;
-  }
-  .day-chip.selected .day-chip-dot { background: var(--blue); }
+  /* ===== CONFIGURATIONS CARD ===== */
+  .card { background: var(--card); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); }
+  .sec-title { font-size: 18px; font-weight: 800; color: var(--text); display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+  .sec-subtitle { font-size: 13px; color: var(--text-muted); margin-bottom: 24px; font-weight: 500; }
 
-  .day-config-list {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+  /* DAYS SELECTOR */
+  .days-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; margin-bottom: 24px; }
+  .day-btn {
+    height: 48px; border-radius: var(--radius-sm); border: 2px solid var(--border); background: var(--bg);
+    color: var(--text-muted); font-size: 13px; font-weight: 700; cursor: pointer; transition: all .15s;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
   }
+  .day-btn span { font-size: 9px; text-transform: uppercase; opacity: 0.7; }
+  .day-btn:hover { border-color: var(--blue); color: var(--blue); }
+  .day-btn.active { background: var(--blue); border-color: var(--blue); color: #fff; box-shadow: 0 4px 12px rgba(37,99,235,0.25); }
 
-  .day-config-item {
-    background: var(--bg);
-    border-radius: var(--radius-sm);
-    border: 1px solid var(--border);
-    overflow: hidden;
-    transition: all .2s;
+  /* CONFIG SECTION CONTAINER */
+  .day-config-section {
+    background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; margin-bottom: 16px;
+    animation: fadeIn 0.2s ease;
   }
-  .day-config-header {
-    display: flex; align-items: center; gap: 12px;
-    padding: 14px 16px;
-    cursor: pointer;
-  }
-  .day-config-header:hover { background: #e8edf7; }
-  .day-config-day-badge {
-    width: 36px; height: 36px; border-radius: 10px;
-    background: var(--blue-light); color: var(--blue);
-    display: grid; place-items: center;
-    font-size: 13px; font-weight: 800;
-    flex-shrink: 0;
-  }
-  .day-config-label { flex: 1; font-size: 14px; font-weight: 700; color: var(--text); }
-  .day-config-preview { font-size: 12px; color: var(--text-muted); font-weight: 500; }
-  .day-config-arrow {
-    font-size: 16px; color: var(--text-light);
-    transition: transform .2s;
-  }
-  .day-config-item.open .day-config-arrow { transform: rotate(180deg); }
+  .day-config-title { font-size: 14px; font-weight: 800; color: var(--text); margin-bottom: 14px; text-transform: uppercase; letter-spacing: 0.3px; display: flex; align-items: center; gap: 6px; }
 
-  .day-config-body {
-    display: none;
-    padding: 0 16px 16px;
-    border-top: 1px solid var(--border);
-  }
-  .day-config-item.open .day-config-body { display: block; }
-
-  .materia-select-label {
-    font-size: 12px; font-weight: 700; color: var(--text-muted);
-    text-transform: uppercase; letter-spacing: 0.5px;
-    margin: 14px 0 10px;
-  }
-
-  .materia-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
-    margin-bottom: 12px;
-  }
+  /* MATERIA GRID OPTIONS */
+  .materia-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 8px; margin-bottom: 14px; }
   .materia-btn {
-    padding: 10px 6px; border-radius: var(--radius-sm);
-    border: 2px solid var(--border); background: var(--card);
-    cursor: pointer; text-align: center; transition: all .15s;
-    display: flex; flex-direction: column; align-items: center; gap: 4px;
+    padding: 10px 8px; border-radius: var(--radius-sm); border: 2px solid var(--border); background: var(--card);
+    cursor: pointer; text-align: center; transition: all .15s; display: flex; flex-direction: column; align-items: center; gap: 4px;
   }
-  .materia-btn .m-icon { font-size: 20px; }
-  .materia-btn .m-name { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .3px; }
-  .materia-btn:hover { border-color: var(--blue); background: var(--blue-light); }
-  .materia-btn.selected { border-color: var(--blue); background: var(--blue-light); }
+  .materia-btn .m-icon { font-size: 18px; }
+  .materia-btn .m-name { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .3px; color: var(--text-muted); }
+  .materia-btn:hover { border-color: var(--blue); }
+  .materia-btn.selected { border-color: var(--blue); box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
 
-  .custom-materia-wrap {
-    display: flex; align-items: center; gap: 8px;
-    margin-top: 4px;
+  /* CUSTOM FIELD & NOTES */
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-label { font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: .5px; }
+  .custom-materia-input, .day-note-input {
+    width: 100%; padding: 10px 14px; border-radius: var(--radius-sm); border: 1.5px solid var(--border);
+    background: var(--card); font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; font-weight: 500;
+    color: var(--text); transition: all .15s; outline: none;
   }
-  .custom-materia-input {
-    flex: 1; padding: 10px 14px;
-    border-radius: var(--radius-sm); border: 2px solid var(--border);
-    background: var(--card); font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 13px; color: var(--text); font-weight: 500;
-    transition: border-color .15s; outline: none;
-  }
-  .custom-materia-input:focus { border-color: var(--blue); }
+  .custom-materia-input:focus, .day-note-input:focus { border-color: var(--blue); background: #fff; }
 
-  .sub-label { font-size: 12px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
-
-  .study-note-input {
-    width: 100%; padding: 10px 14px;
-    border-radius: var(--radius-sm); border: 2px solid var(--border);
-    background: var(--card); font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 13px; color: var(--text); font-weight: 500;
-    transition: border-color .15s; outline: none;
-  }
-  .study-note-input:focus { border-color: var(--blue); }
-
-  /* ===== SAVE BUTTON ===== */
+  /* SAVE FLOATING BAR */
+  .action-area { display: flex; justify-content: flex-end; margin-top: 24px; border-top: 1px solid var(--border); padding-top: 20px; }
   .btn-save {
-    width: 100%; padding: 14px;
-    border-radius: var(--radius-sm); border: none;
-    background: var(--blue); color: #fff;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 15px; font-weight: 700; cursor: pointer;
-    transition: all .2s; display: flex; align-items: center;
-    justify-content: center; gap: 8px;
-    box-shadow: 0 4px 14px rgba(37,99,235,.3);
-    margin-top: 20px;
+    padding: 12px 32px; border-radius: var(--radius-sm); background: var(--green); color: #fff; border: none;
+    font-size: 14px; font-weight: 700; cursor: pointer; transition: all .15s; font-family: 'Plus Jakarta Sans', sans-serif;
+    display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 12px rgba(22,163,74,0.25);
   }
-  .btn-save:hover { background: var(--blue-dark); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(37,99,235,.4); }
-  .btn-save:active { transform: translateY(0); }
+  .btn-save:hover { background: #15803d; transform: translateY(-1px); }
 
-  /* ===== TOAST ===== */
+  /* EMPTY STATE */
+  .empty-state { text-align: center; padding: 40px 20px; color: var(--text-light); font-size: 14px; font-weight: 500; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .empty-state i { font-size: 32px; opacity: 0.5; }
+
+  /* TOAST */
   .toast {
-    position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(80px);
-    background: #0F172A; color: #fff; padding: 12px 22px;
-    border-radius: 14px; font-size: 14px; font-weight: 600;
+    position: fixed; top: 20px; right: 20px; padding: 12px 20px; border-radius: var(--radius-sm);
+    background: #1e293b; color: #fff; font-size: 13px; font-weight: 600; box-shadow: var(--shadow-md);
+    z-index: 1000; transform: translateY(-20px); opacity: 0; transition: all 0.3s ease; pointer-events: none;
     display: flex; align-items: center; gap: 8px;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.25); z-index: 9999;
-    transition: transform .3s cubic-bezier(.34,1.56,.64,1), opacity .3s;
-    opacity: 0;
   }
-  .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
-  .toast.success { background: #16A34A; }
-  .toast.error { background: #DC2626; }
+  .toast.show { transform: translateY(0); opacity: 1; }
+  .toast.success { background: var(--green); }
+  .toast.error { background: var(--red); }
 
-  /* ===== EMPTY STATE ===== */
-  .empty-schedule {
-    text-align: center; padding: 32px 20px;
-    color: var(--text-light); font-size: 14px; font-weight: 500;
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* RESPONSIVE DESIGN */
+  @media (max-width: 850px) {
+    .main { grid-template-columns: 1fr; gap: 20px; padding: 16px; }
+    .days-grid { grid-template-columns: repeat(4, 1fr); }
+    .form-row { grid-template-columns: 1fr; }
   }
-  .empty-schedule i { font-size: 36px; opacity: .3; display: block; margin-bottom: 10px; }
-
-  /* ===== LOADING ===== */
-  .loading-spinner {
-    display: inline-block; width: 18px; height: 18px;
-    border: 2.5px solid rgba(255,255,255,0.4);
-    border-top-color: #fff;
-    border-radius: 50%;
-    animation: spin .7s linear infinite;
-    flex-shrink: 0;
-  }
-  @keyframes spin { to { transform: rotate(360deg); } }
-
-  /* ===== RESPONSIVE ===== */
   @media (max-width: 768px) {
     #top-nav .nav-links { display: none; }
     .mobile-nav { display: flex; }
     body { padding-bottom: 100px; }
-    .page { padding: 20px 16px; }
-    .profile-hero-content { flex-direction: column; align-items: flex-start; gap: 16px; }
-    .btn-logout { width: 100%; justify-content: center; }
-    .days-grid { grid-template-columns: repeat(4, 1fr); }
-    .card { padding: 20px; }
-    .materia-grid { grid-template-columns: repeat(3, 1fr); }
   }
-
-  @media (max-width: 480px) {
-    .days-grid { grid-template-columns: repeat(4, 1fr); }
-    .profile-avatar-big { width: 58px; height: 58px; font-size: 22px; }
-    .profile-info-name { font-size: 20px; }
-  }
-
-  ::-webkit-scrollbar { width: 4px; }
-  ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
 </style>
 </head>
 <body>
@@ -393,378 +223,401 @@
   </div>
   <div class="nav-links">
     <a class="nav-link" href="index.html"><i class="ti ti-layout-dashboard"></i> Início</a>
-    <a class="nav-link active" href="#"><i class="ti ti-settings"></i> Configurações</a>
+    <a class="nav-link active" href="configuracoes.html"><i class="ti ti-settings"></i> Configurações</a>
   </div>
   <div class="nav-right">
-    <div class="nav-avatar" id="nav-avatar">MS</div>
+    <div class="nav-avatar">MS</div>
   </div>
 </nav>
 
-<div class="mobile-nav">
-  <a class="mobile-link" href="index.html"><i class="ti ti-layout-dashboard"></i>Início</a>
-  <a class="mobile-link" href="#"><i class="ti ti-calendar"></i>Agenda</a>
-  <a class="mobile-link" href="#"><i class="ti ti-chart-bar"></i>Resultados</a>
-  <a class="mobile-link active" href="#"><i class="ti ti-settings"></i>Config.</a>
-</div>
+<nav class="mobile-nav">
+  <button class="mobile-nav-btn" onclick="window.location.href='index.html'">
+    <i class="ti ti-home"></i>
+    <span>Início</span>
+  </button>
+  <button class="mobile-nav-btn active" onclick="window.location.href='configuracoes.html'">
+    <i class="ti ti-settings"></i>
+    <span>Configurações</span>
+  </button>
+</nav>
 
-<div class="page">
-
-  <div class="page-header">
-    <div class="page-header-icon"><i class="ti ti-settings-2"></i></div>
-    <div class="page-header-text">
-      <h1>Configurações</h1>
-      <p>Personalize sua experiência no MindSpace</p>
-    </div>
-  </div>
-
-  <div class="profile-hero">
-    <div class="profile-hero-bg"></div>
-    <div class="profile-hero-content">
-      <div class="profile-avatar-big" id="profile-avatar">MS</div>
-      <div class="profile-info">
-        <div class="profile-info-name" id="profile-name">Carregando...</div>
-        <div class="profile-info-user"><i class="ti ti-at" style="font-size:13px;margin-right:3px;"></i><span id="profile-username">...</span></div>
-        <div class="profile-info-badges">
-          <div class="profile-info-badge"><i class="ti ti-star"></i> 8º Ano</div>
-          <div class="profile-info-badge"><i class="ti ti-calendar"></i> 2026</div>
-          <div class="profile-info-badge"><i class="ti ti-book-2"></i> 9 matérias</div>
+<div class="main">
+  <div>
+    <div class="profile-card">
+      <div class="profile-card-bg"></div>
+      <div class="profile-card-content">
+        <div class="profile-avatar-big" id="profile-avatar">MS</div>
+        <div>
+          <div class="profile-name">Carregando...</div>
+          <div class="profile-sub">Estudante</div>
         </div>
+        <div class="profile-badges">
+          <div class="profile-badge"><i class="ti ti-star"></i> 8º Ano</div>
+          <div class="profile-badge"><i class="ti ti-calendar"></i> 2026</div>
+          <div class="profile-badge"><i class="ti ti-book-2"></i> 9 matérias</div>
+        </div>
+        <button class="btn-logout" id="btn-logout">
+          <i class="ti ti-logout"></i> Sair da conta
+        </button>
       </div>
-      <a href="login.html" class="btn-logout" id="btn-logout">
-        <i class="ti ti-logout"></i> Sair da conta
-      </a>
     </div>
   </div>
 
   <div class="card">
-    <div class="card-header">
-      <div class="card-header-icon" style="background:#DBEAFE;color:#2563EB;"><i class="ti ti-calendar-week"></i></div>
-      <div class="card-header-text">
-        <h2>Agenda de Estudos</h2>
-        <p>Defina o que estudar em cada dia da semana</p>
-      </div>
+    <div class="sec-title">
+      <i class="ti ti-calendar-stats" style="color: var(--blue);"></i>
+      Agenda de Estudos
     </div>
+    <div class="sec-subtitle">Selecione os dias da semana em que planeia estudar para configurar as disciplinas.</div>
 
-    <p style="font-size:13px;color:var(--text-muted);font-weight:500;margin-bottom:16px;">Selecione os dias em que você quer estudar:</p>
+    <div class="days-grid" id="days-container"></div>
 
-    <div class="days-grid" id="days-grid">
-      </div>
+    <div id="configs-container"></div>
 
-    <div id="day-config-list" class="day-config-list">
-      <div class="empty-schedule">
-        <i class="ti ti-calendar-off"></i>
-        Selecione pelo menos um dia acima para configurar os estudos.
-      </div>
+    <div class="action-area">
+      <button class="btn-save" id="btn-save-configs">
+        <i class="ti ti-device-floppy"></i> Salvar configurações
+      </button>
     </div>
-
-    <button class="btn-save" id="btn-save">
-      <i class="ti ti-device-floppy"></i> Salvar configurações
-    </button>
   </div>
-
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getDatabase, ref, set, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getDatabase, ref, set, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
-const firebaseConfig = {
-  databaseURL: "https://mindspace-7f8e7-default-rtdb.firebaseio.com/"
-};
+  // Configuração fornecida pelo usuário
+  const firebaseConfig = {
+    apiKey: "AIzaSyCkoD_NBW5K1rBTAtj-pYBsdngpfjZuNS8",
+    authDomain: "mindspace-878fb.firebaseapp.com",
+    databaseURL: "https://mindspace-878fb-default-rtdb.firebaseio.com",
+    projectId: "mindspace-878fb",
+    storageBucket: "mindspace-878fb.firebasestorage.app",
+    messagingSenderId: "884928470815",
+    appId: "1:884928470815:web:3484a28a2dc06312b41a2a",
+    measurementId: "G-XSTGDNGY71"
+  };
 
-// ===================== AUTH CHECK =====================
-const isLogged = localStorage.getItem('mindspace_logged_in') === 'true';
-if (!isLogged) window.location.href = 'login.html';
+  // Autenticação e Storage Keys obtidos do index.html
+  const isLogged = localStorage.getItem('mindspace_logged_in') === 'true';
+  const storageKey = localStorage.getItem('mindspace_storage_key') || 'daniel';
+  const currentName = localStorage.getItem('mindspace_current_name') || 'Usuário MindSpace';
+  const currentInitials = localStorage.getItem('mindspace_current_initials') || 'MS';
 
-const storageKey = localStorage.getItem('mindspace_storage_key') || 'daniel';
-const currentName = localStorage.getItem('mindspace_current_name') || 'Usuário MindSpace';
-const currentInitials = localStorage.getItem('mindspace_current_initials') || 'MS';
-
-// Preenche dados do perfil de imediato de forma segura
-const elName = document.getElementById('profile-name');
-const elUser = document.getElementById('profile-username');
-const elAvatar = document.getElementById('profile-avatar');
-const navAvatar = document.getElementById('nav-avatar');
-
-if(elName) elName.textContent = currentName;
-if(elUser) elUser.textContent = storageKey;
-if(elAvatar) elAvatar.textContent = currentInitials;
-if(navAvatar) navAvatar.textContent = currentInitials;
-
-// Logout
-const btnLogout = document.getElementById('btn-logout');
-if(btnLogout) {
-  btnLogout.addEventListener('click', (e) => {
-    e.preventDefault();
-    localStorage.clear();
+  if (!isLogged) {
     window.location.href = 'login.html';
-  });
-}
-
-// ===================== FIREBASE =====================
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
-
-// ===================== MATERIAS =====================
-const MATERIAS = [
-  { id:'portugues',    label:'Português',        icon:'ti-book-2',     color:'#DB2777', bg:'#FCE7F3' },
-  { id:'matematica',   label:'Matemática',       icon:'ti-math',       color:'#7C3AED', bg:'#EDE9FE' },
-  { id:'ciencias',     label:'Ciências',         icon:'ti-microscope', color:'#16A34A', bg:'#DCFCE7' },
-  { id:'geografia',    label:'Geografia',        icon:'ti-world',      color:'#0284C7', bg:'#E0F2FE' },
-  { id:'historia',     label:'História',         icon:'ti-hourglass',  color:'#D97706', bg:'#FEF3C7' },
-  { id:'textual',      label:'Prod. Textual',    icon:'ti-pencil',     color:'#EA580C', bg:'#FFEDD5' },
-  { id:'ingles',       label:'Inglês',           icon:'ti-language',   color:'#0D9488', bg:'#CCFBF1' },
-  { id:'espanhol',     label:'Espanhol',         icon:'ti-flag-3',     color:'#4338CA', bg:'#E0E7FF' },
-  { id:'filosofia',    label:'Filosofia',        icon:'ti-brain',      color:'#64748B', bg:'#F1F5F9' },
-];
-
-const WEEKDAYS_FULL = ['Domingo','Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado'];
-const WEEKDAYS_SHORT = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
-
-// ===================== STATE =====================
-let schedule = {};
-let selectedDays = new Set();
-
-// ===================== RENDER DAYS GRID =====================
-function renderDaysGrid() {
-  const grid = document.getElementById('days-grid');
-  if(!grid) return;
-  
-  grid.innerHTML = WEEKDAYS_SHORT.map((d, i) => `
-    <div class="day-chip ${selectedDays.has(i) ? 'selected' : ''}" data-day="${i}">
-      <div class="day-chip-abbr">${d}</div>
-      <div class="day-chip-dot"></div>
-    </div>
-  `).join('');
-
-  grid.querySelectorAll('.day-chip').forEach(chip => {
-    chip.addEventListener('click', () => {
-      const day = parseInt(chip.dataset.day, 10);
-      if (selectedDays.has(day)) {
-        selectedDays.delete(day);
-        chip.classList.remove('selected');
-        delete schedule[day];
-      } else {
-        selectedDays.add(day);
-        chip.classList.add('selected');
-        if (!schedule[day]) schedule[day] = { materia: '', custom: '', note: '' };
-      }
-      renderDayConfigs();
-    });
-  });
-}
-
-// ===================== RENDER DAY CONFIGS =====================
-function renderDayConfigs() {
-  const container = document.getElementById('day-config-list');
-  if (!container) return;
-
-  if (selectedDays.size === 0) {
-    container.innerHTML = `
-      <div class="empty-schedule">
-        <i class="ti ti-calendar-off"></i>
-        Selecione pelo menos um dia acima para configurar os estudos.
-      </div>`;
-    return;
   }
 
-  const sorted = [...selectedDays].sort((a, b) => a - b);
-  container.innerHTML = sorted.map(day => {
-    const cfg = schedule[day] || {};
-    const previewText = cfg.custom
-      ? `📝 ${cfg.custom}`
-      : (cfg.materia ? MATERIAS.find(m=>m.id===cfg.materia)?.label || '...' : 'Nenhuma matéria');
-    return `
-      <div class="day-config-item" id="dci-${day}">
-        <div class="day-config-header" data-day="${day}">
-          <div class="day-config-day-badge">${WEEKDAYS_SHORT[day]}</div>
-          <div>
-            <div class="day-config-label">${WEEKDAYS_FULL[day]}</div>
-            <div class="day-config-preview" id="preview-${day}">${previewText}</div>
-          </div>
-          <i class="ti ti-chevron-down day-config-arrow"></i>
-        </div>
-        <div class="day-config-body" id="body-${day}">
-          <div class="materia-select-label">Escolha a matéria:</div>
-          <div class="materia-grid" id="mg-${day}">
-            ${MATERIAS.map(m => `
-              <div class="materia-btn ${cfg.materia === m.id ? 'selected' : ''}" 
-                   data-day="${day}" data-mat="${m.id}">
-                <div class="m-icon" style="color:${m.color};"><i class="ti ${m.icon}"></i></div>
-                <div class="m-name" style="color:${m.color};">${m.label}</div>
-              </div>`).join('')}
-          </div>
-          <div style="margin-bottom:12px;">
-            <div class="sub-label">Ou matéria personalizada:</div>
-            <div class="custom-materia-wrap">
-              <i class="ti ti-edit" style="color:var(--text-muted);font-size:18px;flex-shrink:0;"></i>
-              <input type="text" class="custom-materia-input" id="custom-${day}"
-                placeholder="Ex: Redação, Revisão Geral..."
-                value="${cfg.custom || ''}">
-            </div>
-          </div>
-          <div>
-            <div class="sub-label">Observação (opcional):</div>
-            <input type="text" class="study-note-input" id="note-${day}"
-              placeholder="Ex: Focar no capítulo 3, Fazer exercícios..."
-              value="${cfg.note || ''}">
-          </div>
-        </div>
-      </div>`;
-  }).join('');
+  // Inicializar Firebase
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
 
-  // Eventos internos dos itens renderizados
-  sorted.forEach(day => {
-    const header = document.querySelector(`#dci-${day} .day-config-header`);
-    if(header){
-      header.addEventListener('click', () => {
-        const item = document.getElementById(`dci-${day}`);
-        if(item) item.classList.toggle('open');
-      });
-    }
+  // Mapeamento global de matérias alinhado com index.html
+  const MATERIAS = [
+    { id:'portugues', label:'Português', icon:'ti-book-2', color:'#DB2777', bg:'#FCE7F3' },
+    { id:'matematica', label:'Matemática', icon:'ti-math', color:'#7C3AED', bg:'#EDE9FE' },
+    { id:'ciencias', label:'Ciências', icon:'ti-microscope', color:'#16A34A', bg:'#DCFCE7' },
+    { id:'geografia', label:'Geografia', icon:'ti-world', color:'#0284C7', bg:'#E0F2FE' },
+    { id:'historia', label:'História', icon:'ti-hourglass', color:'#D97706', bg:'#FEF3C7' },
+    { id:'textual', label:'Prod. Textual', icon:'ti-pencil', color:'#EA580C', bg:'#FFEDD5' },
+    { id:'ingles', label:'Inglês', icon:'ti-language', color:'#0D9488', bg:'#CCFBF1' },
+    { id:'espanhol', label:'Espanhol', icon:'ti-alphabet-latin', color:'#DB2777', bg:'#FCE7F3' },
+    { id:'filosofia', label:'Filosofia', icon:'ti-bulb', color:'#4338CA', bg:'#E0E7FF' }
+  ];
 
-    document.querySelectorAll(`#mg-${day} .materia-btn`).forEach(btn => {
-      btn.addEventListener('click', () => {
-        const mat = btn.dataset.mat;
-        document.querySelectorAll(`#mg-${day} .materia-btn`).forEach(b => b.classList.remove('selected'));
-        btn.classList.add('selected');
-        const customInput = document.getElementById(`custom-${day}`);
-        if(customInput) customInput.value = '';
-        if (!schedule[day]) schedule[day] = {};
-        schedule[day].materia = mat;
-        schedule[day].custom = '';
-        updatePreview(day);
-      });
+  const DIAS_SEMANA = [
+    { index: 0, min: 'Dom', full: 'Domingo' },
+    { index: 1, min: 'Seg', full: 'Segunda-feira' },
+    { index: 2, min: 'Ter', full: 'Terça-feira' },
+    { index: 3, min: 'Qua', full: 'Quarta-feira' },
+    { index: 4, min: 'Qui', full: 'Quinta-feira' },
+    { index: 5, min: 'Sex', full: 'Sexta-feira' },
+    { index: 6, min: 'Sáb', full: 'Sábado' }
+  ];
+
+  // Estado Local da Página
+  let schedule = {}; 
+  let selectedDays = new Set();
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // Carregar informações do perfil salvos no LocalStorage
+    const profileNameEl = document.querySelector('.profile-name');
+    if (profileNameEl) profileNameEl.textContent = currentName;
+    
+    const profileAvatarEl = document.getElementById('profile-avatar');
+    if (profileAvatarEl) profileAvatarEl.textContent = currentInitials;
+    
+    const navAvatarEl = document.querySelector('#top-nav .nav-avatar');
+    if (navAvatarEl) navAvatarEl.textContent = currentInitials;
+
+    // Ações de Logout
+    document.getElementById('btn-logout').addEventListener('click', () => {
+      localStorage.removeItem('mindspace_logged_in');
+      window.location.href = 'login.html';
     });
 
-    const customInput = document.getElementById(`custom-${day}`);
-    if(customInput) {
-      customInput.addEventListener('input', () => {
-        if (!schedule[day]) schedule[day] = {};
-        schedule[day].custom = customInput.value;
-        if (customInput.value.trim()) {
-          document.querySelectorAll(`#mg-${day} .materia-btn`).forEach(b => b.classList.remove('selected'));
-          schedule[day].materia = '';
-        }
-        updatePreview(day);
-      });
-    }
+    document.getElementById('btn-save-configs').addEventListener('click', saveConfigs);
 
-    const noteInput = document.getElementById(`note-${day}`);
-    if(noteInput) {
-      noteInput.addEventListener('input', () => {
-        if (!schedule[day]) schedule[day] = {};
-        schedule[day].note = noteInput.value;
-      });
-    }
-  });
-}
-
-function updatePreview(day) {
-  const cfg = schedule[day] || {};
-  const el = document.getElementById(`preview-${day}`);
-  if (!el) return;
-  const text = cfg.custom
-    ? `📝 ${cfg.custom}`
-    : (cfg.materia ? MATERIAS.find(m=>m.id===cfg.materia)?.label || '...' : 'Nenhuma matéria');
-  el.textContent = text;
-}
-
-// ===================== SAVE CORRIGIDO (SEM TRAVAMENTO INFINITO) =====================
-document.getElementById('btn-save').addEventListener('click', async () => {
-  const btn = document.getElementById('btn-save');
-  btn.innerHTML = `<div class="loading-spinner"></div> Salvando...`;
-  btn.disabled = true;
-
-  // 1. Monta o objeto com máxima segurança contra elementos nulos
-  const payload = {};
-  selectedDays.forEach(day => {
-    const customEl = document.getElementById(`custom-${day}`);
-    const noteEl = document.getElementById(`note-${day}`);
-    const cfg = schedule[day] || {};
-    
-    // Se o elemento não existir na tela ainda, ele mantém o valor que já estava na memória
-    payload[day] = {
-      materia: cfg.materia || '',
-      custom: customEl ? customEl.value.trim() : (cfg.custom || ''),
-      note: noteEl ? noteEl.value.trim() : (cfg.note || ''),
-    };
+    // Inicialização da Trava de Dados
+    loadSchedule();
   });
 
-  // 2. Sincroniza imediatamente a variável de estado global
-  schedule = JSON.parse(JSON.stringify(payload));
+  function renderDaysGrid() {
+    const container = document.getElementById('days-container');
+    container.innerHTML = '';
 
-  try {
-    // 3. Salva no Firebase para sincronizar com seu Celular/PC
-    await set(ref(db, `usuarios/${storageKey}/schedule`), payload);
-
-    // 4. Salva no LocalStorage local como um espelho de segurança rápido
-    localStorage.setItem(`mindspace_schedule_${storageKey}`, JSON.stringify(payload));
-    
-    showToast('✅ Configurações salvas com sucesso!', 'success');
-  } catch(e) {
-    showToast('❌ Erro de conexão com a nuvem.', 'error');
-    console.error("Erro ao sincronizar com o Firebase:", e);
-  } finally {
-    // Esse bloco garante que o botão saia do carregamento infinito aconteça o que acontecer
-    btn.innerHTML = `<i class="ti ti-device-floppy"></i> Salvar configurações`;
-    btn.disabled = false;
+    DIAS_SEMANA.forEach(d => {
+      const btn = document.createElement('button');
+      btn.className = `day-btn ${selectedDays.has(d.index) ? 'active' : ''}`;
+      btn.innerHTML = `<span>${d.min}</span>`;
+      btn.addEventListener('click', () => toggleDay(d.index));
+      container.appendChild(btn);
+    });
   }
-});
-// ===================== TOAST SEGURO =====================
-function showToast(msg, type = '') {
-  const t = document.getElementById('toast');
-  if(!t) {
-    alert(msg);
-    return;
-  }
-  t.textContent = msg;
-  t.className = 'toast ' + type;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 3000);
-}
 
-// ===================== LOAD FROM FIREBASE DE FORMA FLUIDA =====================
-async function loadSchedule() {
-  // Renderiza a interface vazia imediatamente para o utilizador não ver uma tela travada
-  renderDaysGrid();
-  renderDayConfigs();
-
-  try {
-    // Busca dados no Firebase com limite de segurança de 5 segundos
-    const snap = await Promise.race([
-      get(ref(db, `usuarios/${storageKey}/schedule`)),
-      new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout de leitura')), 5000))
-    ]);
-
-    if (snap && snap.exists()) {
-      const data = snap.val();
-      schedule = {};
-      selectedDays = new Set();
-      Object.entries(data).forEach(([k, v]) => {
-        const dayIndex = parseInt(k, 10);
-        if(!isNaN(dayIndex)) {
-          schedule[dayIndex] = v;
-          selectedDays.add(dayIndex);
-        }
-      });
-      
-      // Atualiza a interface com as informações reais da nuvem
-      renderDaysGrid();
-      renderDayConfigs();
+  function toggleDay(dayIndex) {
+    if (selectedDays.has(dayIndex)) {
+      selectedDays.delete(dayIndex);
+      delete schedule[dayIndex];
+    } else {
+      selectedDays.add(dayIndex);
+      schedule[dayIndex] = { materia: '', custom: '', note: '' };
     }
-  } catch(e) {
-    console.error('Erro ao carregar dados do Firebase:', e);
-    // Em caso de falha de rede, a interface continua limpa e utilizável localmente
     renderDaysGrid();
     renderDayConfigs();
   }
-}
 
-// Inicializa o fluxo
-loadSchedule();
+  function renderDayConfigs() {
+    const container = document.getElementById('configs-container');
+    container.innerHTML = '';
+
+    if (selectedDays.size === 0) {
+      container.innerHTML = `
+        <div class="empty-state">
+          <i class="ti ti-calendar-off"></i>
+          <span>Nenhum dia de estudos selecionado. Ative os dias acima na grade.</span>
+        </div>`;
+      return;
+    }
+
+    const sortedDays = Array.from(selectedDays).sort((a, b) => a - b);
+
+    sortedDays.forEach(day => {
+      const dayData = DIAS_SEMANA.find(d => d.index === day);
+      const cfg = schedule[day] || { materia: '', custom: '', note: '' };
+
+      const section = document.createElement('div');
+      section.className = 'day-config-section';
+      section.id = `sec-day-${day}`;
+
+      let materiasHTML = '';
+      MATERIAS.forEach(mat => {
+        const isSelected = cfg.materia === mat.id;
+        materiasHTML += `
+          <button type="button" class="materia-btn ${isSelected ? 'selected' : ''}" 
+                  data-day="${day}" data-matid="${mat.id}"
+                  style="color: ${mat.color}; background: ${isSelected ? mat.bg : 'var(--card)'}; border-color: ${isSelected ? mat.color : 'var(--border)'}">
+            <i class="m-icon ti ${mat.icon}"></i>
+            <span class="m-name">${mat.label}</span>
+          </button>
+        `;
+      });
+
+      // Sanitização básica dos valores para evitar brechas de segurança XSS
+      const safeCustomVal = (cfg.custom || '').replace(/"/g, '&quot;');
+      const safeNoteVal = (cfg.note || '').replace(/"/g, '&quot;');
+
+      section.innerHTML = `
+        <div class="day-config-title">
+          <i class="ti ti-notebook" style="color: var(--blue);"></i> Configuração para ${dayData.full}
+        </div>
+        <div class="materia-grid" id="mg-${day}">
+          ${materiasHTML}
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Ou uma matéria personalizada</label>
+            <input type="text" class="custom-materia-input" id="custom-${day}" 
+                   placeholder="Ex: Redação, Revisão..." value="${safeCustomVal}">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Observação / Foco do dia</label>
+            <input type="text" class="day-note-input" id="note-${day}" 
+                   placeholder="Ex: Focar em exercícios da pág 4" value="${safeNoteVal}">
+          </div>
+        </div>
+      `;
+
+      container.appendChild(section);
+
+      // Eventos para seleção rápida das matérias pré-definidas
+      section.querySelectorAll('.materia-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const b = e.currentTarget;
+          const d = b.dataset.day;
+          const matId = b.dataset.matid;
+
+          section.querySelectorAll('.materia-btn').forEach(mBtn => {
+            mBtn.classList.remove('selected');
+            mBtn.style.background = 'var(--card)';
+            mBtn.style.borderColor = 'var(--border)';
+          });
+
+          if (schedule[d].materia === matId) {
+            schedule[d].materia = '';
+          } else {
+            schedule[d].materia = matId;
+            b.classList.add('selected');
+            const targetMat = MATERIAS.find(m => m.id === matId);
+            b.style.background = targetMat.bg;
+            b.style.borderColor = targetMat.color;
+            
+            // Limpa o campo customizado se escolheu um botão nativo
+            const cInput = document.getElementById(`custom-${d}`);
+            if(cInput) cInput.value = '';
+            schedule[d].custom = '';
+          }
+        });
+      });
+
+      // Escuta inteligente do input customizado corrigida
+      const customInput = document.getElementById(`custom-${day}`);
+      if(customInput) {
+        customInput.addEventListener('input', () => {
+          if (!schedule[day]) schedule[day] = {};
+          schedule[day].custom = customInput.value;
+          
+          if (customInput.value.trim() !== '') {
+            section.querySelectorAll('.materia-btn').forEach(b => {
+              b.classList.remove('selected');
+              b.style.background = 'var(--card)';
+              b.style.borderColor = 'var(--border)';
+            });
+            schedule[day].materia = '';
+          }
+        });
+      }
+
+      // Escuta das anotações do dia
+      const noteInput = document.getElementById(`note-${day}`);
+      if(noteInput) {
+        noteInput.addEventListener('input', () => {
+          if (!schedule[day]) schedule[day] = {};
+          schedule[day].note = noteInput.value;
+        });
+      }
+    });
+  }
+
+  function showToast(msg, type = '') {
+    const t = document.getElementById('toast');
+    if(!t) {
+      alert(msg);
+      return;
+    }
+    t.textContent = msg;
+    t.className = 'toast ' + type;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3000);
+  }
+
+  // ===================== CARREGAR E PERSISTIR NO FIREBASE REFORMULADO =====================
+  async function loadSchedule() {
+    renderDaysGrid();
+    renderDayConfigs();
+
+    try {
+      // Cria uma corrida de promessas para evitar travamento infinito de rede (5 segundos)
+      const snap = await Promise.race([
+        get(ref(db, `usuarios/${storageKey}/schedule`)),
+        new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout de leitura')), 5000))
+      ]);
+
+      if (snap && snap.exists()) {
+        const data = snap.val();
+        schedule = {};
+        selectedDays = new Set();
+        
+        Object.entries(data).forEach(([k, v]) => {
+          const dayIndex = parseInt(k, 10);
+          if(!isNaN(dayIndex)) {
+            schedule[dayIndex] = v;
+            selectedDays.add(dayIndex);
+          }
+        });
+        
+        // Espelha o backup de segurança localmente
+        localStorage.setItem(`mindspace_schedule_${storageKey}`, JSON.stringify(data));
+        
+        renderDaysGrid();
+        renderDayConfigs();
+      } else {
+        // Se a nuvem estiver vazia, tenta coletar o cache local
+        const cached = localStorage.getItem(`mindspace_schedule_${storageKey}`);
+        if (cached) {
+          const data = JSON.parse(cached);
+          Object.entries(data).forEach(([k, v]) => {
+            const dayIndex = parseInt(k, 10);
+            if(!isNaN(dayIndex)) {
+              schedule[dayIndex] = v;
+              selectedDays.add(dayIndex);
+            }
+          });
+          renderDaysGrid();
+          renderDayConfigs();
+        }
+      }
+    } catch(e) {
+      console.error('Erro ao carregar dados do Firebase:', e);
+      showToast('Aviso: Falha na rede. Exibindo dados locais offline.', 'error');
+      
+      const cached = localStorage.getItem(`mindspace_schedule_${storageKey}`);
+      if (cached) {
+        const data = JSON.parse(cached);
+        Object.entries(data).forEach(([k, v]) => {
+          const dayIndex = parseInt(k, 10);
+          if(!isNaN(dayIndex)) {
+            schedule[dayIndex] = v;
+            selectedDays.add(dayIndex);
+          }
+        });
+        renderDaysGrid();
+        renderDayConfigs();
+      }
+    }
+  }
+
+  async function saveConfigs() {
+    // Validação básica para impedir que salve dias ativos sem nenhuma matéria marcada
+    let valid = true;
+    selectedDays.forEach(day => {
+      const cfg = schedule[day];
+      if (!cfg.materia && !cfg.custom.trim()) {
+        valid = false;
+      }
+    });
+
+    if (!valid) {
+      showToast('Por favor, defina uma matéria ou texto personalizado para todos os dias marcados.', 'error');
+      return;
+    }
+
+    try {
+      // Envia a árvore sanitizada para o Firebase Realtime Database
+      await set(ref(db, `usuarios/${storageKey}/schedule`), schedule);
+      
+      // Atualiza o espelho de segurança local (Local Storage)
+      localStorage.setItem(`mindspace_schedule_${storageKey}`, JSON.stringify(schedule));
+      
+      showToast('Configurações da agenda salvas com sucesso!', 'success');
+    } catch (e) {
+      console.error('Erro ao salvar no Firebase:', e);
+      showToast('Erro ao salvar na nuvem. Verifique a sua conexão.', 'error');
+    }
+  }
 </script>
+
 </body>
 </html>

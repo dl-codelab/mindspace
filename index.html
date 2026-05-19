@@ -50,10 +50,9 @@
     background: var(--bg);
     color: var(--text);
     min-height: 100vh;
-    padding-bottom: 40px; /* Garante espaço para o menu flutuante no mobile */
+    padding-bottom: 40px;
   }
 
- /* ===== TOP NAV ===== */
 #top-nav {
   height: 56px;
   background: var(--card);
@@ -130,7 +129,6 @@
   cursor: pointer;
 }
 
-  /* ===== BOTTOM MOBILE NAV (MENU INFERIOR FLUTUANTE) ===== */
   .mobile-nav {
   position: fixed;
   bottom: 0;
@@ -139,15 +137,15 @@
   height: 64px;
   background: #ffffff;
   border-top: 1px solid var(--border);
-  display: flex; /* Mantém em linha */
+  display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0; /* Remove paddings laterais para não esmagar */
+  padding: 0;
   z-index: 999;
 }
 
 .mobile-nav-btn {
-  flex: 1; /* O segredo está aqui: cada botão vai expandir e ocupar exatamente metade (50%) */
+  flex: 1;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -186,7 +184,6 @@
     background: var(--blue-light);
   }
 
-  /* ===== MAIN LAYOUT ===== */
   .main {
     display: grid;
     grid-template-columns: 280px 1fr 300px;
@@ -196,7 +193,6 @@
     margin: 0 auto;
   }
 
-  /* ===== CARDS ===== */
   .card {
     background: var(--card);
     border-radius: var(--radius);
@@ -212,7 +208,6 @@
     height: 500px;
   }
 
-  /* ===== PROFILE CARD ===== */
   .profile-card {
     background: linear-gradient(145deg, #1E3A8A 0%, #2563EB 60%, #3B82F6 100%);
     border-radius: var(--radius);
@@ -249,7 +244,6 @@
     display: flex; align-items: center; gap: 4px;
   }
 
-  /* ===== SECTION HEADERS ===== */
   .sec-header {
     display: flex; align-items: center; justify-content: space-between;
     margin-bottom: 14px;
@@ -270,7 +264,6 @@
   }
   .btn-add:hover { background: var(--blue-dark); transform: scale(1.05); }
 
-  /* ===== WORKS CARD ===== */
   .work-item {
     display: flex; align-items: center; gap: 10px;
     padding: 10px 12px; border-radius: var(--radius-sm);
@@ -301,7 +294,6 @@
     color: var(--text-light); font-size: 13px; font-weight: 500;
   }
 
-  /* ===== TODAY CARD ===== */
   .today-card { 
     display: flex; 
     flex-direction: column; 
@@ -333,7 +325,6 @@
   .today-block-value { font-size: 14px; font-weight: 700; color: var(--text); margin-top: 2px; }
   .today-block-sub { font-size: 12px; color: var(--text-muted); margin-top: 1px; }
 
-  /* ===== NOTES ===== */
   .notes-card {
     background: var(--blue);
     border-radius: var(--radius);
@@ -388,7 +379,6 @@
     padding-right: 4px;
   }
 
-  /* ===== HOMEWORK ===== */
   .hw-item {
     display: flex; align-items: center; gap: 10px;
     padding: 12px 14px; border-radius: var(--radius-sm);
@@ -430,7 +420,6 @@
   }
   .btn-add-hw:hover { background: var(--blue-dark); transform: translateY(-1px); }
 
-  /* ===== POPUP / MODAL ===== */
   .overlay {
     position: fixed; inset: 0; background: rgba(15,23,42,0.55);
     z-index: 200; display: flex; align-items: center; justify-content: center;
@@ -507,7 +496,6 @@
   }
   .btn-primary:hover { background: var(--blue-dark); transform: translateY(-1px); }
 
-  /* MATERIA GRID */
   .materia-grid {
     display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
   }
@@ -525,7 +513,6 @@
   .materia-btn:hover { border-color: var(--blue); background: var(--blue-light); }
   .materia-btn.selected { border-color: var(--blue); background: var(--blue-light); }
 
-  /* ALL NOTES POPUP */
   .note-list-item {
     padding: 12px 14px; border-radius: var(--radius-sm);
     background: var(--bg); margin-bottom: 8px; border: 1px solid var(--border);
@@ -548,7 +535,6 @@
   }
   .btn-delete-note:hover { background: var(--red-light); color: var(--red); }
 
-  /* WORK POPUP */
   .work-detail-row {
     display: flex; align-items: center; gap: 10px;
     padding: 10px 14px; border-radius: var(--radius-sm);
@@ -561,16 +547,15 @@
     padding: 6px 12px; border-radius: 20px; font-size: 13px; font-weight: 700; margin-top: 4px;
   }
 
-  /* RESPONSIVE & MOBILE DESIGN */
   @media (max-width: 1100px) {
     .main { grid-template-columns: 1fr 1fr; }
     .col-right { grid-column: span 2; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
   }
   
   @media (max-width: 768px) {
-    #top-nav .nav-links { display: none; } /* Esconde menu de cima no mobile */
-    .mobile-nav { display: flex; }       /* Mostra o menu flutuante inferior */
-    body { padding-bottom: 100px; }       /* Evita que o menu tampe o conteúdo */
+    #top-nav .nav-links { display: none; }
+    .mobile-nav { display: flex; }
+    body { padding-bottom: 100px; }
   }
 
   @media (max-width: 700px) {
@@ -610,9 +595,7 @@
 </nav>
   
 <div class="main">
-
   <div style="display:flex;flex-direction:column;gap:20px;">
-
     <div class="profile-card">
       <div class="profile-card-bg"></div>
       <div class="profile-card-content">
@@ -643,11 +626,9 @@
         <div class="no-items"><i class="ti ti-clipboard-x" style="font-size:22px;opacity:.4;"></i><br>Nenhum trabalho ainda</div>
       </div>
     </div>
-
   </div>
 
   <div style="display:flex;flex-direction:column;gap:20px;">
-
     <div class="card today-card">
       <div>
         <div class="today-header-title" id="today-weekday"></div>
@@ -672,11 +653,9 @@
         Ver todas <i class="ti ti-arrow-right" style="font-size:14px;"></i>
       </button>
     </div>
-
   </div>
 
   <div class="col-right" style="display:flex;flex-direction:column;gap:20px;">
-
     <div class="card">
       <div class="sec-header">
         <div class="sec-title">
@@ -691,7 +670,6 @@
         <i class="ti ti-plus"></i> Adicionar dever
       </button>
     </div>
-
   </div>
 </div>
 
@@ -700,13 +678,19 @@
 </div>
 
 <script type="module">
-// ===================== INICIALIZAÇÃO DO FIREBASE (v10+) =====================
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-// IMPORTAÇÕES CORRIGIDAS: getAnalytics removido para evitar o travamento do script
 import { getDatabase, ref, set, onValue, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
-
-npm install firebase
+// Substitua pelo objeto de configuração real do seu projeto Firebase Console
+const firebaseConfig = {
+  apiKey: "MUDE_AQUI_PELO_SEU_CONFIG",
+  authDomain: "MUDE_AQUI_PELO_SEU_CONFIG",
+  databaseURL: "MUDE_AQUI_PELO_SEU_CONFIG",
+  projectId: "MUDE_AQUI_PELO_SEU_CONFIG",
+  storageBucket: "MUDE_AQUI_PELO_SEU_CONFIG",
+  messagingSenderId: "MUDE_AQUI_PELO_SEU_CONFIG",
+  appId: "MUDE_AQUI_PELO_SEU_CONFIG"
+};
   
 const isLogged = localStorage.getItem('mindspace_logged_in') === 'true';
 const storageKey = localStorage.getItem('mindspace_storage_key') || 'daniel'; 
@@ -720,7 +704,6 @@ if (!isLogged) {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-// Atualiza o layout com os dados do usuário logado assim que a página carregar
 document.addEventListener('DOMContentLoaded', () => {
   const profileNameEl = document.querySelector('.profile-name');
   if (profileNameEl) profileNameEl.textContent = currentName;
@@ -732,7 +715,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if (navAvatarEl) navAvatarEl.textContent = currentInitials;
 });
 
-// ===================== DATA & STORAGE =====================
 const MATERIAS = [
   { id:'portugues',    label:'Português',        icon:'ti-book-2',     color:'#DB2777', bg:'#FCE7F3' },
   { id:'matematica',   label:'Matemática',       icon:'ti-math',       color:'#7C3AED', bg:'#EDE9FE' },
@@ -750,8 +732,8 @@ function getMateria(id){ return MATERIAS.find(m=>m.id===id)||MATERIAS[0]; }
 let notes = [];
 let homeworks = [];
 let works = [];
+let userSchedule = {};
 
-// BLINDAGEM CONTRA PERDA DE DADOS: Carrega o backup do navegador imediatamente ao abrir a página
 try {
   const localBackup = localStorage.getItem(`mindspace_db_${storageKey}`);
   if (localBackup) {
@@ -766,17 +748,12 @@ try {
 
 function save(){
   const payload = { notes, homeworks, works };
-  
-  // 1. Salva localmente no navegador na mesma hora (Segurança contra refresh)
   localStorage.setItem(`mindspace_db_${storageKey}`, JSON.stringify(payload));
-
-  // 2. Envia para a nuvem do Firebase
   set(ref(db, `usuarios/${storageKey}`), payload).catch(error => {
     console.error("Erro ao salvar no Firebase: ", error);
   });
 }
 
-// ===================== DATE =====================
 const WEEKDAYS = ['Domingo','Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado'];
 const MONTHS = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
 const now = new Date();
@@ -796,7 +773,6 @@ function daysLeft(deadline){
   return Math.round((b-a)/(1000*60*60*24));
 }
 
-// ===================== INTERATIVIDADE DOS MENUS =====================
 const topLinks = document.querySelectorAll('#top-nav .nav-link');
 const mobileLinks = document.querySelectorAll('.mobile-nav .mobile-link');
 
@@ -812,34 +788,11 @@ function handleNavClick(e, index) {
 topLinks.forEach((link, i) => link.addEventListener('click', (e) => handleNavClick(e, i)));
 mobileLinks.forEach((link, i) => link.addEventListener('click', (e) => handleNavClick(e, i)));
 
-// ===================== TODAY RENDER =====================
-let userSchedule = {}; // Carregado do Firebase
-
-// Carrega agenda personalizada do Firebase
-async function loadUserSchedule() {
-  try {
-    const snap = await get(ref(db, `usuarios/${storageKey}/schedule`));
-    if (snap.exists()) {
-      userSchedule = snap.val();
-      // Salva no localStorage para carregamentos instantâneos futuros
-      localStorage.setItem(`mindspace_schedule_${storageKey}`, JSON.stringify(userSchedule));
-    }
-  } catch (e) {
-    console.error("Erro ao carregar agenda do Firebase:", e);
-    // Se falhar (offline), tenta usar o cache local anterior
-    const cached = localStorage.getItem(`mindspace_schedule_${storageKey}`);
-    if (cached) userSchedule = JSON.parse(cached);
-  }
-  // CORREÇÃO CRUCIAL: Força o app a desenhar o dia atual assim que os dados chegam
-  renderToday(); 
-}
 function renderToday(){
   document.getElementById('today-weekday').textContent = `Hoje (${WEEKDAYS[todayWd]} / ${now.getDate()} de ${MONTHS[now.getMonth()]}),`;
   document.getElementById('today-date').textContent = now.getFullYear();
 
   const blocks = [];
-
-  // Usa a agenda personalizada do Firebase
   const todaySchedule = userSchedule[todayWd];
   if(todaySchedule){
     let label = 'Estudar para', icon = 'ti-books', color = '#16A34A', bg = '#DCFCE7', value = '', sub = '';
@@ -911,7 +864,6 @@ function renderToday(){
   document.getElementById('today-blocks').innerHTML = blocks.join('');
 }
 
-// ===================== NOTES RENDER =====================
 function renderNotes(){
   const area = document.getElementById('note-recent-area');
   if(!notes.length){
@@ -927,7 +879,6 @@ function renderNotes(){
     </div>`;
 }
 
-// ===================== HOMEWORK RENDER =====================
 function renderHW(){
   const list = document.getElementById('hw-list');
   if(!homeworks.length){
@@ -972,7 +923,6 @@ function checkHW(i){
   },1400);
 }
 
-// ===================== WORKS RENDER =====================
 function renderWorks(){
   const list = document.getElementById('works-list');
   if(!works.length){
@@ -1006,7 +956,6 @@ function renderWorks(){
   });
 }
 
-// ===================== POPUP SYSTEM =====================
 function openPopup(type, data){
   const overlay = document.getElementById('overlay');
   const popup = document.getElementById('popup-content');
@@ -1023,13 +972,11 @@ function openPopup(type, data){
   if(closeBtn) closeBtn.addEventListener('click', closePopup);
 }
 
-// MODIFICADO: Agora força a atualização da tela local imediatamente ao fechar qualquer pop-up
 function closePopup(){
   document.getElementById('overlay').classList.remove('show');
   renderToday(); renderNotes(); renderHW(); renderWorks();
 }
 
-// ===================== NOTE ADD =====================
 function buildNoteAdd(){
   setTimeout(() => {
     const cb = document.getElementById('note-has-deadline');
@@ -1081,7 +1028,6 @@ function buildNoteAdd(){
     <button class="btn-primary" id="btn-save-note"><i class="ti ti-device-floppy" style="margin-right:6px;"></i>Salvar anotação</button>`;
 }
 
-// ===================== NOTES ALL =====================
 function buildNotesAll(){
   let html = `
     <div class="popup-header">
@@ -1132,7 +1078,6 @@ function buildNotesAll(){
   return html;
 }
 
-// ===================== HW ADD =====================
 function buildHWAdd(){
   let selectedHWMateria = '';
   const grid = MATERIAS.map(m=>`
@@ -1184,7 +1129,6 @@ function buildHWAdd(){
     <button class="btn-primary" id="btn-save-hw"><i class="ti ti-plus" style="margin-right:6px;"></i>Adicionar dever</button>`;
 }
 
-// ===================== WORK ADD =====================
 function buildWorkAdd(){
   let selectedWorkMateria = '';
   const grid = MATERIAS.map(m=>`
@@ -1247,7 +1191,6 @@ function buildWorkAdd(){
     <button class="btn-primary" id="btn-save-work"><i class="ti ti-plus" style="margin-right:6px;"></i>Adicionar trabalho</button>`;
 }
 
-// ===================== WORK DETAIL =====================
 function buildWorkDetail(i){
   const w = works[i];
   const m = getMateria(w.materia);
@@ -1305,7 +1248,6 @@ function buildWorkDetail(i){
     </div>`;
 }
 
-// ===================== EVENT TRIGGERS =====================
 document.getElementById('btn-add-work-trigger').addEventListener('click', () => openPopup('work-add'));
 document.getElementById('btn-add-note-trigger').addEventListener('click', () => openPopup('note-add'));
 document.getElementById('btn-view-notes-trigger').addEventListener('click', () => openPopup('notes-all'));
@@ -1315,9 +1257,21 @@ document.getElementById('overlay').addEventListener('click', (e) => {
   if (e.target === document.getElementById('overlay')) closePopup();
 });
 
-// ===================== INICIALIZAÇÃO CORRIGIDA (SEM ERRO DE SINTAXE) =====================
+async function loadUserSchedule() {
+  try {
+    const snap = await get(ref(db, `usuarios/${storageKey}/schedule`));
+    if (snap.exists()) {
+      userSchedule = snap.val();
+      localStorage.setItem(`mindspace_schedule_${storageKey}`, JSON.stringify(userSchedule));
+    }
+  } catch (e) {
+    console.error("Erro ao carregar agenda do Firebase:", e);
+    const cached = localStorage.getItem(`mindspace_schedule_${storageKey}`);
+    if (cached) userSchedule = JSON.parse(cached);
+  }
+  renderToday(); 
+}
 
-// 1. Tenta puxar o cache local imediatamente para evitar qualquer tela branca ao atualizar
 try {
   const cachedSched = localStorage.getItem(`mindspace_schedule_${storageKey}`);
   if (cachedSched) {
@@ -1327,41 +1281,17 @@ try {
   console.log("Sem cache de agenda inicial disponível.");
 }
 
-// 2. Garante a renderização visual instantânea na tela usando o backup local
 renderNotes();
 renderHW();
 renderWorks();
 renderToday(); 
 
-// 3. Função para carregar a agenda do Firebase de forma assíncrona
-async function loadUserSchedule() {
-  try {
-    const snap = await get(ref(db, `usuarios/${storageKey}/schedule`));
-    if (snap.exists()) {
-      userSchedule = snap.val();
-      // Atualiza o cache local com os dados atualizados da nuvem
-      localStorage.setItem(`mindspace_schedule_${storageKey}`, JSON.stringify(userSchedule));
-    }
-  } catch (e) {
-    console.error("Erro ao carregar agenda do Firebase:", e);
-    // Se a rede falhar, mantém o cache que já foi carregado no passo 1
-    const cached = localStorage.getItem(`mindspace_schedule_${storageKey}`);
-    if (cached) userSchedule = JSON.parse(cached);
-  }
-  // Força o aplicativo a desenhar o dia atual assim que as informações chegam
-  renderToday(); 
-}
-
-// Executa a carga inicial da nuvem
 loadUserSchedule();
 
-// ===================== ESCUTA EM TEMPO REAL (SINCRONIZAÇÃO TOTAL PC/CELULAR) =====================
 const userRef = ref(db, `usuarios/${storageKey}`);
 onValue(userRef, (snapshot) => {
   if (snapshot.exists()) {
     const data = snapshot.val();
-    
-    // Alimenta as variáveis apenas se os nós existirem na nuvem, prevenindo apagar dados locais
     notes = data.notes || [];
     homeworks = data.homeworks || [];
     works = data.works || [];
@@ -1371,10 +1301,8 @@ onValue(userRef, (snapshot) => {
       localStorage.setItem(`mindspace_schedule_${storageKey}`, JSON.stringify(userSchedule));
     }
     
-    // Atualiza o espelho de segurança do localStorage
     localStorage.setItem(`mindspace_db_${storageKey}`, JSON.stringify({ notes, homeworks, works }));
     
-    // Redesenha todos os componentes na tela com os dados atualizados em tempo real
     renderToday();
     renderNotes();
     renderHW();

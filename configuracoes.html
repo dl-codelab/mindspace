@@ -672,47 +672,47 @@ function updatePreview(day) {
   el.textContent = text;
 }
 
-// ===================== SAVE CORRIGIDO (SALVA NO FIREBASE E LOCALSTORAGE) =====================
+// ===================== SAVE CORRIGIDO (SEM TRAVAMENTO INFINITO) =====================
 document.getElementById('btn-save').addEventListener('click', async () => {
   const btn = document.getElementById('btn-save');
   btn.innerHTML = `<div class="loading-spinner"></div> Salvando...`;
   btn.disabled = true;
 
-  // 1. Monta o objeto final lendo EXATAMENTE o que está digitado nos inputs da tela agora
+  // 1. Monta o objeto com máxima segurança contra elementos nulos
   const payload = {};
   selectedDays.forEach(day => {
     const customEl = document.getElementById(`custom-${day}`);
     const noteEl = document.getElementById(`note-${day}`);
     const cfg = schedule[day] || {};
     
+    // Se o elemento não existir na tela ainda, ele mantém o valor que já estava na memória
     payload[day] = {
       materia: cfg.materia || '',
-      custom: customEl ? customEl.value.trim() : '',
-      note: noteEl ? noteEl.value.trim() : '',
+      custom: customEl ? customEl.value.trim() : (cfg.custom || ''),
+      note: noteEl ? noteEl.value.trim() : (cfg.note || ''),
     };
   });
 
-  // 2. ATUALIZA A VARIÁVEL GLOBAL (O que faltava fazer!)
+  // 2. Sincroniza imediatamente a variável de estado global
   schedule = JSON.parse(JSON.stringify(payload));
 
   try {
-    // 3. Salva no Firebase (Nuvem) para atualizar o celular e outros dispositivos
+    // 3. Salva no Firebase para sincronizar com seu Celular/PC
     await set(ref(db, `usuarios/${storageKey}/schedule`), payload);
 
-    // 4. Salva no LocalStorage local (Backup instantâneo para evitar tela branca)
+    // 4. Salva no LocalStorage local como um espelho de segurança rápido
     localStorage.setItem(`mindspace_schedule_${storageKey}`, JSON.stringify(payload));
     
-    showToast('✅ Configurações salvas na nuvem com sucesso!', 'success');
+    showToast('✅ Configurações salvas com sucesso!', 'success');
   } catch(e) {
-    // Se a internet cair, avisa que ficou apenas no navegador atual
-    showToast('⚠️ Salvo apenas localmente! Sem ligação com o Firebase.', 'error');
-    console.error("Erro ao sincronizar com nuvem:", e);
+    showToast('❌ Erro de conexão com a nuvem.', 'error');
+    console.error("Erro ao sincronizar com o Firebase:", e);
+  } finally {
+    // Esse bloco garante que o botão saia do carregamento infinito aconteça o que acontecer
+    btn.innerHTML = `<i class="ti ti-device-floppy"></i> Salvar configurações`;
+    btn.disabled = false;
   }
-
-  btn.innerHTML = `<i class="ti ti-device-floppy"></i> Salvar configurações`;
-  btn.disabled = false;
 });
-
 // ===================== TOAST SEGURO =====================
 function showToast(msg, type = '') {
   const t = document.getElementById('toast');

@@ -1350,6 +1350,9 @@ onValue(userRef, (snapshot) => {
 });
 
 // CORREÇÃO: Puxa o cache local da agenda para renderizar SEM ESPERAR o Firebase
+// ===================== INICIALIZAÇÃO CORRIGIDA =====================
+
+// Tenta puxar o cache local imediatamente para evitar qualquer tela branca
 try {
   const cachedSched = localStorage.getItem(`mindspace_schedule_${storageKey}`);
   if (cachedSched) userSchedule = JSON.parse(cachedSched);
@@ -1357,13 +1360,57 @@ try {
   console.log("Sem cache de agenda inicial disponível.");
 }
 
-// Força a renderização imediata do app na tela com o backup do navegador
+// Garante a renderização visual instantânea na tela
 renderNotes();
 renderHW();
 renderWorks();
-renderToday(); // Desenha o dia de hoje imediatamente com o que tiver no cache
+renderToday(); 
 
-loadUserSchedule(); // Consulta o Firebase em background para atualizar se houver mudanças
+// Função limpa para carregar a agenda do Firebase
+async function loadUserSchedule() {
+  try {
+    const snap = await get(ref(db, `usuarios/${storageKey}/schedule`));
+    if (snap.exists()) {
+      userSchedule = snap.val();
+      localStorage.setItem(`mindspace_schedule_${storageKey}`, JSON.stringify(userSchedule));
+    }
+  } catch (e) {
+    console.error("Erro ao carregar agenda do Firebase:", e);
+    const cached = localStorage.getItem(`mindspace_schedule_${storageKey}`);
+    if (cached) userSchedule = JSON.parse(cached);
+  }
+  renderToday(); 
+}
+
+// Executa a carga inicial do banco
+loadUserSchedule();
+
+// ===================== ESCUTA EM TEMPO REAL CORRIGIDA (SINCRO TOTAL) =====================
+const userRef = ref(db, `usuarios/${storageKey}`);
+onValue(userRef, (snapshot) => {
+  if (snapshot.exists()) {
+    const data = snapshot.val();
+    
+    // Alimenta as variáveis apenas se os nós existirem na nuvem, evitando apagar dados locais
+    notes = data.notes || [];
+    homeworks = data.homeworks || [];
+    works = data.works || [];
+    
+    if (data.schedule) {
+      userSchedule = data.schedule;
+      localStorage.setItem(`mindspace_schedule_${storageKey}`, JSON.stringify(userSchedule));
+    }
+    
+    // Atualiza o espelho de segurança do localStorage
+    localStorage.setItem(`mindspace_db_${storageKey}`, JSON.stringify({ notes, homeworks, works }));
+    
+    // Redesenha todos os componentes na tela com os dados atualizados vindos de fora
+    renderToday();
+    renderNotes();
+    renderHW();
+    renderWorks();
+  }
+});
 </script>
 </body>
 </html>

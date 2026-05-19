@@ -705,9 +705,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebas
 // IMPORTAÇÕES CORRIGIDAS: getAnalytics removido para evitar o travamento do script
 import { getDatabase, ref, set, onValue, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
-const firebaseConfig = {
-  databaseURL: "https://mindspace-7f8e7-default-rtdb.firebaseio.com/"
-};
+npm install firebase
 
 const isLogged = localStorage.getItem('mindspace_logged_in') === 'true';
 const storageKey = localStorage.getItem('mindspace_storage_key') || 'daniel'; 

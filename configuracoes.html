@@ -672,36 +672,40 @@ function updatePreview(day) {
   el.textContent = text;
 }
 
-// ===================== SAVE (BLINDADO COM FINALLY E TIMEOUT) =====================
-// ===================== SAVE =====================
+// ===================== SAVE CORRIGIDO (SALVA NO FIREBASE E LOCALSTORAGE) =====================
 document.getElementById('btn-save').addEventListener('click', async () => {
   const btn = document.getElementById('btn-save');
   btn.innerHTML = `<div class="loading-spinner"></div> Salvando...`;
   btn.disabled = true;
 
-  // Monta o objeto final lendo o estado atual dos inputs da tela
+  // 1. Monta o objeto final lendo EXATAMENTE o que está digitado nos inputs da tela agora
   const payload = {};
   selectedDays.forEach(day => {
     const customEl = document.getElementById(`custom-${day}`);
     const noteEl = document.getElementById(`note-${day}`);
     const cfg = schedule[day] || {};
+    
     payload[day] = {
       materia: cfg.materia || '',
-      custom: customEl ? customEl.value.trim() : (cfg.custom || ''),
-      note: noteEl ? noteEl.value.trim() : (cfg.note || ''),
+      custom: customEl ? customEl.value.trim() : '',
+      note: noteEl ? noteEl.value.trim() : '',
     };
   });
 
-  try {
-    // 1. Salva imediatamente no LocalStorage do dispositivo atual
-    localStorage.setItem(`mindspace_schedule_${storageKey}`, JSON.stringify(payload));
+  // 2. ATUALIZA A VARIÁVEL GLOBAL (O que faltava fazer!)
+  schedule = JSON.parse(JSON.stringify(payload));
 
-    // 2. Envia para o Firebase de forma limpa e direta
+  try {
+    // 3. Salva no Firebase (Nuvem) para atualizar o celular e outros dispositivos
     await set(ref(db, `usuarios/${storageKey}/schedule`), payload);
-    showToast('✅ Configurações salvas com sucesso!', 'success');
+
+    // 4. Salva no LocalStorage local (Backup instantâneo para evitar tela branca)
+    localStorage.setItem(`mindspace_schedule_${storageKey}`, JSON.stringify(payload));
+    
+    showToast('✅ Configurações salvas na nuvem com sucesso!', 'success');
   } catch(e) {
-    // Se a rede falhar, os dados ainda estarão salvos no aparelho
-    showToast('⚠️ Salvo localmente! Sem ligação com o Firebase.', 'error');
+    // Se a internet cair, avisa que ficou apenas no navegador atual
+    showToast('⚠️ Salvo apenas localmente! Sem ligação com o Firebase.', 'error');
     console.error("Erro ao sincronizar com nuvem:", e);
   }
 
